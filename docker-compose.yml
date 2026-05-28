@@ -1,0 +1,10 @@
+services:
+  medconnect-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: medconnect-app:latest
+    container_name: medconnect-app
+    ports:
+      - "80:80"
+    restart: unless-stopped
