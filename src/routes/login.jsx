@@ -65,12 +65,17 @@ export default function LoginPage() {
           </>
         )}
       </div>
-      <div className="mt-6 text-xs text-text-muted text-center">
-        <Link to="/clinic/login" className="hover:text-foreground">Clinic doctor</Link>
-        <span className="mx-2">·</span>
-        <Link to="/staff/login" className="hover:text-foreground">Hospital staff</Link>
-        <span className="mx-2">·</span>
-        <Link to="/admin/login" className="hover:text-foreground">Admin</Link>
+      {/* All portal links */}
+      <div className="mt-6 text-xs text-text-muted text-center space-y-1.5">
+        <div className="flex items-center justify-center gap-2 flex-wrap">
+          <Link to="/clinic/login" className="hover:text-foreground">Clinic doctor</Link>
+          <span>·</span>
+          <Link to="/hospital-doctor/login" className="hover:text-foreground">Hospital doctor</Link>
+          <span>·</span>
+          <Link to="/staff/login" className="hover:text-foreground">Hospital staff</Link>
+          <span>·</span>
+          <Link to="/admin/login" className="hover:text-foreground">Admin</Link>
+        </div>
       </div>
     </div>
   );

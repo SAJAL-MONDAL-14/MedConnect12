@@ -17,10 +17,17 @@ import ClinicApply from "./routes/clinic.apply";
 import ClinicLogin from "./routes/clinic.login";
 import ClinicDashboard from "./routes/clinic.dashboard";
 import StaffLogin from "./routes/staff.login";
-import StaffDashboard from "./routes/staff.dashboard";
 import DoctorsPage from "./routes/doctors.index";
 import DoctorProfile from "./routes/doctors.$id";
 import HospitalDetail from "./routes/hospital.$id";
+import HospitalDoctorLogin from "./routes/hospital-doctor.login";
+import HospitalDoctorDashboard from "./routes/hospital-doctor.dashboard";
+// ── 4 role-based staff dashboards ────────────────────────────────────────────
+import HospitalAdminDashboard from "./routes/staff.dashboard.admin";
+import OPDDashboard            from "./routes/staff.dashboard.opd";
+import WardDashboard           from "./routes/staff.dashboard.ward";
+import BillingDashboard        from "./routes/staff.dashboard.billing";
+// ─────────────────────────────────────────────────────────────────────────────
 import "./styles.css";
 
 const router = createBrowserRouter([
@@ -28,25 +35,33 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { path: "", element: <Home /> },
-      { path: "search", element: <SearchPage /> },
-      { path: "login", element: <Login /> },
-      { path: "profile", element: <Profile /> },
-      { path: "labs", element: <LabsPage /> },
-      { path: "sos", element: <SOSPage /> },
-      { path: "clinics", element: <Clinics /> },
-      { path: "booking", element: <Booking /> },
-      { path: "booking-success", element: <BookingSuccess /> },
-      { path: "admin/login", element: <AdminLogin /> },
-      { path: "admin/dashboard", element: <AdminDashboard /> },
-      { path: "clinic/apply", element: <ClinicApply /> },
-      { path: "clinic/login", element: <ClinicLogin /> },
-      { path: "clinic/dashboard", element: <ClinicDashboard /> },
-      { path: "staff/login", element: <StaffLogin /> },
-      { path: "staff/dashboard", element: <StaffDashboard /> },
-      { path: "doctors", element: <DoctorsPage /> },
-      { path: "doctors/:id", element: <DoctorProfile /> },
-      { path: "hospital/:id", element: <HospitalDetail /> },
+      { path: "",                           element: <Home /> },
+      { path: "search",                     element: <SearchPage /> },
+      { path: "login",                      element: <Login /> },
+      { path: "profile",                    element: <Profile /> },
+      { path: "labs",                       element: <LabsPage /> },
+      { path: "sos",                        element: <SOSPage /> },
+      { path: "clinics",                    element: <Clinics /> },
+      { path: "booking",                    element: <Booking /> },
+      { path: "booking-success",            element: <BookingSuccess /> },
+      { path: "admin/login",                element: <AdminLogin /> },
+      { path: "admin/dashboard",            element: <AdminDashboard /> },
+      { path: "clinic/apply",               element: <ClinicApply /> },
+      { path: "clinic/login",               element: <ClinicLogin /> },
+      { path: "clinic/dashboard",           element: <ClinicDashboard /> },
+      { path: "staff/login",                element: <StaffLogin /> },
+      // ── role dashboards ────────────────────────────────────────────────────
+      { path: "staff/dashboard/admin",      element: <HospitalAdminDashboard /> },
+      { path: "staff/dashboard/opd",        element: <OPDDashboard /> },
+      { path: "staff/dashboard/ward",       element: <WardDashboard /> },
+      { path: "staff/dashboard/billing",    element: <BillingDashboard /> },
+      // ── doctor portals ─────────────────────────────────────────────────────
+      { path: "hospital-doctor/login",      element: <HospitalDoctorLogin /> },
+      { path: "hospital-doctor/dashboard",  element: <HospitalDoctorDashboard /> },
+      // ── public ─────────────────────────────────────────────────────────────
+      { path: "doctors",                    element: <DoctorsPage /> },
+      { path: "doctors/:id",                element: <DoctorProfile /> },
+      { path: "hospital/:id",               element: <HospitalDetail /> },
     ],
   },
 ]);
