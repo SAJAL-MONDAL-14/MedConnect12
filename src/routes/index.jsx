@@ -5,7 +5,16 @@ import { HospitalCard, StarRating, LiveDot } from "@/components/HospitalCard";
 import { MapPanel } from "@/components/MapPanel";
 import { hospitals, doctors } from "@/lib/mockData";
 import { DoctorAvatar } from "@/components/DoctorAvatar";
-import { Search, MapPin, ChevronRight, Siren, Sparkles, ShieldCheck, Clock, ArrowRight } from "lucide-react";
+import {
+  Search,
+  MapPin,
+  ChevronRight,
+  Siren,
+  Sparkles,
+  ShieldCheck,
+  Clock,
+  ArrowRight,
+} from "lucide-react";
 
 const filterPills = [
   { label: "Near me" },
@@ -29,7 +38,9 @@ export default function Home() {
 
   const submit = (e) => {
     e?.preventDefault();
-    navigate(`/search?q=${encodeURIComponent(q)}&filters=${encodeURIComponent(activeFilters.join(","))}`);
+    navigate(
+      `/search?q=${encodeURIComponent(q)}&filters=${encodeURIComponent(activeFilters.join(","))}`,
+    );
   };
 
   return (
@@ -46,13 +57,18 @@ export default function Home() {
               <span className="live-dot" /> Real-time bed availability
             </span>
             <h1 className="mt-5 text-[40px] leading-[1.1] font-bold text-primary-dark tracking-tight">
-              Find hospitals & book<br />instantly
+              Find hospitals & book
+              <br />
+              instantly
             </h1>
             <p className="mt-3 text-base text-primary-dark/70 max-w-md">
               See who has beds right now. No more calling around.
             </p>
 
-            <form onSubmit={submit} className="mt-7 max-w-[600px] bg-card rounded-xl shadow-elevated p-2 flex items-center gap-2">
+            <form
+              onSubmit={submit}
+              className="mt-7 max-w-[600px] bg-card rounded-xl shadow-elevated p-2 flex items-center gap-2"
+            >
               <div className="flex items-center gap-2 pl-3 text-muted-foreground">
                 <MapPin className="h-4 w-4 text-primary" />
               </div>
@@ -62,7 +78,10 @@ export default function Home() {
                 placeholder="Search hospitals, doctors, specialties..."
                 className="flex-1 bg-transparent text-sm py-2 outline-none placeholder:text-text-muted"
               />
-              <button type="submit" className="inline-flex items-center gap-1.5 rounded-lg bg-primary text-primary-foreground px-4 py-2.5 text-sm font-semibold hover:bg-primary-dark transition">
+              <button
+                type="submit"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-primary text-primary-foreground px-4 py-2.5 text-sm font-semibold hover:bg-primary-dark transition"
+              >
                 <Search className="h-4 w-4" /> Search
               </button>
             </form>
@@ -76,7 +95,9 @@ export default function Home() {
                     type="button"
                     onClick={() => toggleFilter(p.label)}
                     className={`rounded-full px-3 py-1.5 text-xs font-medium border transition ${
-                      on ? "bg-primary text-primary-foreground border-primary" : "bg-white/70 text-primary-dark border-primary/20 hover:bg-white"
+                      on
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "bg-white/70 text-primary-dark border-primary/20 hover:bg-white"
                     }`}
                   >
                     {p.label}
@@ -103,7 +124,9 @@ export default function Home() {
           ].map((s) => (
             <div key={s.label} className="text-center px-4">
               <div className="text-3xl md:text-4xl font-bold text-primary">{s.value}</div>
-              <div className="text-xs text-muted-foreground mt-1 uppercase tracking-wider">{s.label}</div>
+              <div className="text-xs text-muted-foreground mt-1 uppercase tracking-wider">
+                {s.label}
+              </div>
             </div>
           ))}
         </div>
@@ -118,7 +141,10 @@ export default function Home() {
               <LiveDot /> Live availability · Siliguri, WB
             </p>
           </div>
-          <Link to="/search" className="hidden sm:inline-flex items-center gap-1 text-sm text-primary font-medium hover:underline">
+          <Link
+            to="/search"
+            className="hidden sm:inline-flex items-center gap-1 text-sm text-primary font-medium hover:underline"
+          >
             See all <ChevronRight className="h-4 w-4" />
           </Link>
         </div>
@@ -143,10 +169,15 @@ export default function Home() {
             </div>
             <div>
               <h3 className="font-bold text-lg">Emergency? One tap SOS</h3>
-              <p className="text-sm text-white/80">Finds nearest ICU beds instantly · Auto-alerts your contacts</p>
+              <p className="text-sm text-white/80">
+                Finds nearest ICU beds instantly · Auto-alerts your contacts
+              </p>
             </div>
           </div>
-          <Link to="/sos" className="inline-flex items-center gap-2 rounded-full bg-card text-emergency px-5 py-2.5 text-sm font-bold hover:bg-card/95 transition shadow-md">
+          <Link
+            to="/sos"
+            className="inline-flex items-center gap-2 rounded-full bg-card text-emergency px-5 py-2.5 text-sm font-bold hover:bg-card/95 transition shadow-md"
+          >
             Hold SOS <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -156,14 +187,34 @@ export default function Home() {
       <section className="bg-secondary mt-16 border-y border-border">
         <div className="max-w-[1200px] mx-auto px-6 py-14">
           <h2 className="text-2xl font-semibold text-center text-foreground">How it works</h2>
-          <p className="text-sm text-muted-foreground text-center mt-1">Three steps. Under 60 seconds.</p>
+          <p className="text-sm text-muted-foreground text-center mt-1">
+            Three steps. Under 60 seconds.
+          </p>
           <div className="mt-10 grid md:grid-cols-3 gap-6">
             {[
-              { n: 1, icon: MapPin, title: "Allow location", desc: "We use your GPS to find the closest hospitals — no signup required to browse." },
-              { n: 2, icon: Sparkles, title: "See live availability", desc: "Real bed counts updated by hospital staff. Filter by specialty, type, rating." },
-              { n: 3, icon: ShieldCheck, title: "Book instantly", desc: "Pick a slot, confirm. WhatsApp confirmation in seconds. Pay at the clinic." },
+              {
+                n: 1,
+                icon: MapPin,
+                title: "Allow location",
+                desc: "We use your GPS to find the closest hospitals — no signup required to browse.",
+              },
+              {
+                n: 2,
+                icon: Sparkles,
+                title: "See live availability",
+                desc: "Real bed counts updated by hospital staff. Filter by specialty, type, rating.",
+              },
+              {
+                n: 3,
+                icon: ShieldCheck,
+                title: "Book instantly",
+                desc: "Pick a slot, confirm. WhatsApp confirmation in seconds. Pay at the clinic.",
+              },
             ].map((s) => (
-              <div key={s.n} className="rounded-xl bg-card border border-border p-6 text-center hover:shadow-lift transition">
+              <div
+                key={s.n}
+                className="rounded-xl bg-card border border-border p-6 text-center hover:shadow-lift transition"
+              >
                 <div className="mx-auto h-10 w-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">
                   {s.n}
                 </div>
@@ -186,9 +237,14 @@ export default function Home() {
         </div>
         <div className="flex gap-4 overflow-x-auto pb-3 -mx-6 px-6 snap-x">
           {doctors.map((d) => (
-            <div key={d.id} className="snap-start shrink-0 w-[280px] rounded-xl bg-card border border-border p-5 hover:shadow-lift transition">
+            <div
+              key={d.id}
+              className="snap-start shrink-0 w-[280px] rounded-xl bg-card border border-border p-5 hover:shadow-lift transition"
+            >
               <div className="flex items-center gap-3">
-                <div className={`h-12 w-12 rounded-full flex items-center justify-center text-sm font-bold text-${d.avatarColor}-foreground bg-${d.avatarColor}`}>
+                <div
+                  className={`h-12 w-12 rounded-full flex items-center justify-center text-sm font-bold text-${d.avatarColor}-foreground bg-${d.avatarColor}`}
+                >
                   {d.initials}
                 </div>
                 <div className="min-w-0">
@@ -203,7 +259,10 @@ export default function Home() {
               <div className="mt-3 flex items-center gap-1.5 text-xs rounded-md bg-success-soft text-success px-2.5 py-1.5">
                 <Clock className="h-3.5 w-3.5" /> {d.nextSlot}
               </div>
-              <Link to="/booking" className="mt-3 block text-center rounded-md bg-primary text-primary-foreground py-2 text-xs font-semibold hover:bg-primary-dark transition">
+              <Link
+                to="/booking"
+                className="mt-3 block text-center rounded-md bg-primary text-primary-foreground py-2 text-xs font-semibold hover:bg-primary-dark transition"
+              >
                 Book consultation
               </Link>
             </div>
@@ -219,21 +278,37 @@ export default function Home() {
               <span>Med</span>
               <span className="text-primary">Connect</span>
             </div>
-            <p className="mt-3 text-background/60 text-xs">Find hospitals. Book instantly. Save lives.</p>
+            <p className="mt-3 text-background/60 text-xs">
+              Find hospitals. Book instantly. Save lives.
+            </p>
             <div className="mt-4 flex gap-2">
-              <span className="text-xs px-3 py-1.5 rounded border border-background/20 text-background/70">App Store</span>
-              <span className="text-xs px-3 py-1.5 rounded border border-background/20 text-background/70">Google Play</span>
+              <span className="text-xs px-3 py-1.5 rounded border border-background/20 text-background/70">
+                App Store
+              </span>
+              <span className="text-xs px-3 py-1.5 rounded border border-background/20 text-background/70">
+                Google Play
+              </span>
             </div>
           </div>
           {[
-            { title: "Patients", links: ["Find hospitals", "Book a doctor", "Lab tests", "SOS Emergency"] },
-            { title: "Hospitals", links: ["Partner with us", "Staff portal", "Pricing", "Documentation"] },
+            {
+              title: "Patients",
+              links: ["Find hospitals", "Book a doctor", "Lab tests", "SOS Emergency"],
+            },
+            {
+              title: "Hospitals",
+              links: ["Partner with us", "Staff portal", "Pricing", "Documentation"],
+            },
             { title: "Company", links: ["About", "Privacy", "Terms", "Contact"] },
           ].map((c) => (
             <div key={c.title}>
               <h4 className="font-semibold mb-3">{c.title}</h4>
               <ul className="space-y-2 text-background/60">
-                {c.links.map((l) => <li key={l} className="hover:text-background cursor-pointer">{l}</li>)}
+                {c.links.map((l) => (
+                  <li key={l} className="hover:text-background cursor-pointer">
+                    {l}
+                  </li>
+                ))}
               </ul>
             </div>
           ))}
