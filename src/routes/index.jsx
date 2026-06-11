@@ -1,11 +1,9 @@
-
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { Navbar } from "@/components/Navbar";
 import { HospitalCard, StarRating, LiveDot } from "@/components/HospitalCard";
 import { MapPanel } from "@/components/MapPanel";
 import { hospitals, doctors } from "@/lib/mockData";
-import { DoctorAvatar } from "@/components/DoctorAvatar";
 import {
   Search, MapPin, ChevronRight, Siren, Sparkles,
   ShieldCheck, Clock, ArrowRight, BedDouble,
@@ -172,43 +170,85 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right — Doctor Avatar + floating cards */}
+            {/* Right — Live hospital dashboard panel */}
             <div className="hidden lg:block relative"
               style={{ opacity: heroVisible ? 1 : 0, transform: heroVisible ? "translateY(0)" : "translateY(24px)", transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s" }}>
-              <DoctorAvatar />
 
-              {/* Floating stat cards */}
-              <div className="absolute -left-8 top-16 rounded-2xl px-4 py-3 shadow-2xl"
-                style={{ background: "oklch(0.16 0.04 250)", border: "1px solid oklch(1 0 0 / 0.12)", backdropFilter: "blur(20px)" }}>
-                <div className="flex items-center gap-2">
-                  <BedDouble className="h-4 w-4" style={{ color: "oklch(0.65 0.18 250)" }} />
-                  <div>
-                    <div className="text-white text-sm font-bold">12 beds</div>
-                    <div className="text-white/50 text-[10px]">free at NBMC</div>
+              {/* Main card */}
+              <div className="rounded-3xl overflow-hidden shadow-2xl"
+                style={{ background: "oklch(0.16 0.04 250)", border: "1px solid oklch(1 0 0 / 0.12)", backdropFilter: "blur(24px)" }}>
+
+                {/* Card header */}
+                <div className="px-5 py-4 flex items-center justify-between"
+                  style={{ borderBottom: "1px solid oklch(1 0 0 / 0.08)" }}>
+                  <div className="flex items-center gap-2">
+                    <span className="live-dot" />
+                    <span className="text-white/70 text-xs font-semibold uppercase tracking-wider">Live · Siliguri</span>
                   </div>
+                  <span className="text-white/30 text-[10px] font-mono">Updated 2 min ago</span>
+                </div>
+
+                {/* Hospital rows */}
+                <div className="divide-y" style={{ borderColor: "oklch(1 0 0 / 0.06)" }}>
+                  {[
+                    { name: "North Bengal MC",     type: "Govt",    general: 12, icu: 3,  status: "good"    },
+                    { name: "CityMed Multispeciality", type: "Pvt", general: 18, icu: 4,  status: "good"    },
+                    { name: "Siliguri District H", type: "Govt",    general: 5,  icu: 0,  status: "low"     },
+                    { name: "Neotia Getwel",       type: "Pvt",     general: 0,  icu: 0,  status: "full"    },
+                  ].map((h, i) => (
+                    <div key={h.name} className="px-5 py-3.5 flex items-center gap-3 hover:bg-white/[0.03] transition">
+                      <div className="h-8 w-8 rounded-xl flex items-center justify-center shrink-0 text-xs font-bold"
+                        style={{ background: "oklch(1 0 0 / 0.08)", color: "oklch(0.75 0 0)" }}>
+                        {i + 1}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-white text-sm font-semibold truncate">{h.name}</div>
+                        <div className="text-white/40 text-[10px]">{h.type}</div>
+                      </div>
+                      <div className="flex items-center gap-2 shrink-0">
+                        <div className="text-right">
+                          <div className="text-[10px] text-white/40 uppercase tracking-wide">Gen</div>
+                          <div className={`text-sm font-bold ${h.general === 0 ? "text-red-400" : "text-white"}`}>{h.general}</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-[10px] text-white/40 uppercase tracking-wide">ICU</div>
+                          <div className={`text-sm font-bold ${h.icu === 0 ? "text-red-400" : "text-emerald-400"}`}>{h.icu}</div>
+                        </div>
+                        <div className={`h-2 w-2 rounded-full ml-1 ${
+                          h.status === "good" ? "bg-emerald-400" :
+                          h.status === "low"  ? "bg-yellow-400"  : "bg-red-400"
+                        }`} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Bottom quick stats */}
+                <div className="px-5 py-4 grid grid-cols-3 gap-3"
+                  style={{ borderTop: "1px solid oklch(1 0 0 / 0.08)" }}>
+                  {[
+                    { label: "Beds free",    value: "35",  color: "text-emerald-400" },
+                    { label: "Bookings/day", value: "1.2k",color: "text-blue-400"   },
+                    { label: "Doctors live", value: "42",  color: "text-purple-400"  },
+                  ].map(s => (
+                    <div key={s.label} className="text-center rounded-xl py-2.5"
+                      style={{ background: "oklch(1 0 0 / 0.05)" }}>
+                      <div className={`text-lg font-bold ${s.color}`}>{s.value}</div>
+                      <div className="text-white/40 text-[9px] uppercase tracking-wide mt-0.5">{s.label}</div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              <div className="absolute -right-4 top-1/2 rounded-2xl px-4 py-3 shadow-2xl"
-                style={{ background: "oklch(0.16 0.04 250)", border: "1px solid oklch(1 0 0 / 0.12)", backdropFilter: "blur(20px)" }}>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4" style={{ color: "oklch(0.65 0.18 162)" }} />
-                  <div>
-                    <div className="text-white text-sm font-bold">Booked!</div>
-                    <div className="text-white/50 text-[10px]">Anita Kumar · 10 AM</div>
-                  </div>
+              {/* Recent booking notification */}
+              <div className="mt-3 rounded-2xl px-4 py-3 flex items-center gap-3"
+                style={{ background: "oklch(0.20 0.08 162 / 0.6)", border: "1px solid oklch(0.55 0.18 162 / 0.3)", backdropFilter: "blur(16px)" }}>
+                <CheckCircle2 className="h-5 w-5 shrink-0" style={{ color: "oklch(0.65 0.18 162)" }} />
+                <div className="flex-1 min-w-0">
+                  <div className="text-white text-xs font-semibold">Booking confirmed</div>
+                  <div className="text-white/50 text-[10px]">Anita Kumar · Dr. Sharma · 10:00 AM</div>
                 </div>
-              </div>
-
-              <div className="absolute -left-4 bottom-24 rounded-2xl px-4 py-3 shadow-2xl"
-                style={{ background: "oklch(0.36 0.14 25)", border: "1px solid oklch(1 0 0 / 0.12)" }}>
-                <div className="flex items-center gap-2">
-                  <Siren className="h-4 w-4 text-white" />
-                  <div>
-                    <div className="text-white text-sm font-bold">SOS Active</div>
-                    <div className="text-white/70 text-[10px]">ETA 8 min</div>
-                  </div>
-                </div>
+                <span className="text-[10px] font-mono" style={{ color: "oklch(0.65 0.18 162)" }}>Just now</span>
               </div>
             </div>
           </div>
@@ -495,4 +535,3 @@ export default function Home() {
     </div>
   );
 }
-
