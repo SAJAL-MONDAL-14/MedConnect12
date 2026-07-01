@@ -1,7 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap");
 @import "tailwindcss" source(none);
-@source "../src";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@source "../src";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -11,8 +11,8 @@
  */
 
 @theme inline {
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -57,53 +57,53 @@
   --shadow-lift: 0 4px 12px -2px oklch(0 0 0 / 0.08), 0 2px 6px -1px oklch(0 0 0 / 0.06);
   --shadow-elevated: 0 12px 32px -8px oklch(0 0 0 / 0.18);
 
-  --gradient-hero: linear-gradient(135deg, oklch(0.42 0.13 250) 0%, oklch(0.30 0.13 254) 100%);
-  --gradient-emergency: linear-gradient(135deg, oklch(0.32 0.16 25) 0%, oklch(0.18 0.10 25) 100%);
-  --gradient-success: linear-gradient(135deg, oklch(0.18 0.04 160) 0%, oklch(0.10 0.03 160) 100%);
+  --gradient-hero: linear-gradient(135deg, oklch(0.42 0.13 250) 0%, oklch(0.3 0.13 254) 100%);
+  --gradient-emergency: linear-gradient(135deg, oklch(0.32 0.16 25) 0%, oklch(0.18 0.1 25) 100%);
+  --gradient-success: linear-gradient(135deg, oklch(0.18 0.04 160) 0%, oklch(0.1 0.03 160) 100%);
 }
 
 :root {
-  --background: oklch(0.985 0.002 95);          /* #F7F7F4 */
-  --foreground: oklch(0.18 0 0);                /* #1A1A1A */
+  --background: oklch(0.985 0.002 95); /* #F7F7F4 */
+  --foreground: oklch(0.18 0 0); /* #1A1A1A */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.18 0 0);
 
-  --primary: oklch(0.45 0.13 250);              /* #185FA5 */
+  --primary: oklch(0.45 0.13 250); /* #185FA5 */
   --primary-foreground: oklch(1 0 0);
-  --primary-dark: oklch(0.32 0.13 254);         /* #0C447C */
-  --primary-soft: oklch(0.95 0.025 250);        /* #E6F1FB */
+  --primary-dark: oklch(0.32 0.13 254); /* #0C447C */
+  --primary-soft: oklch(0.95 0.025 250); /* #E6F1FB */
 
   --secondary: oklch(0.96 0.005 95);
   --secondary-foreground: oklch(0.18 0 0);
 
   --muted: oklch(0.96 0.005 95);
-  --muted-foreground: oklch(0.45 0 0);          /* #666 */
-  --text-muted: oklch(0.62 0 0);                /* #999 */
+  --muted-foreground: oklch(0.45 0 0); /* #666 */
+  --text-muted: oklch(0.62 0 0); /* #999 */
 
   --accent: oklch(0.95 0.025 250);
   --accent-foreground: oklch(0.32 0.13 254);
 
-  --success: oklch(0.58 0.13 162);              /* #1D9E75 */
+  --success: oklch(0.58 0.13 162); /* #1D9E75 */
   --success-foreground: oklch(1 0 0);
-  --success-soft: oklch(0.95 0.04 162);         /* #E1F5EE */
+  --success-soft: oklch(0.95 0.04 162); /* #E1F5EE */
   --success-dark: oklch(0.45 0.13 162);
 
-  --warning: oklch(0.55 0.13 60);               /* #BA7517 */
+  --warning: oklch(0.55 0.13 60); /* #BA7517 */
   --warning-foreground: oklch(1 0 0);
-  --warning-soft: oklch(0.95 0.05 75);          /* #FAEEDA */
+  --warning-soft: oklch(0.95 0.05 75); /* #FAEEDA */
 
-  --emergency: oklch(0.58 0.21 25);             /* #E24B4A */
+  --emergency: oklch(0.58 0.21 25); /* #E24B4A */
   --emergency-foreground: oklch(1 0 0);
   --emergency-soft: oklch(0.95 0.03 25);
-  --emergency-dark: oklch(0.32 0.16 25);        /* #7A0F0F */
+  --emergency-dark: oklch(0.32 0.16 25); /* #7A0F0F */
 
   --destructive: oklch(0.58 0.21 25);
   --destructive-foreground: oklch(1 0 0);
 
-  --border: oklch(0.92 0.005 95);               /* #EAEAE6 */
-  --input: oklch(0.94 0.003 95);                /* #F4F4F0 */
+  --border: oklch(0.92 0.005 95); /* #EAEAE6 */
+  --input: oklch(0.94 0.003 95); /* #F4F4F0 */
   --ring: oklch(0.45 0.13 250);
 }
 
@@ -127,13 +127,13 @@
   --accent-foreground: oklch(0.85 0.05 250);
   --success: oklch(0.62 0.13 162);
   --success-foreground: oklch(0.08 0 0);
-  --success-soft: oklch(0.20 0.04 162);
+  --success-soft: oklch(0.2 0.04 162);
   --warning: oklch(0.65 0.13 60);
   --warning-foreground: oklch(0.08 0 0);
   --warning-soft: oklch(0.22 0.05 75);
   --emergency: oklch(0.62 0.21 25);
   --emergency-foreground: oklch(1 0 0);
-  --emergency-soft: oklch(0.20 0.05 25);
+  --emergency-soft: oklch(0.2 0.05 25);
   --emergency-dark: oklch(0.32 0.16 25);
   --destructive: oklch(0.62 0.21 25);
   --destructive-foreground: oklch(1 0 0);
@@ -143,47 +143,97 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html, body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
-  body { background-color: var(--color-background); color: var(--color-foreground); }
-  .font-mono { font-family: var(--font-mono); }
+  * {
+    border-color: var(--color-border);
+  }
+  html,
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
 }
 
 /* Live data pulse — green dot for real-time bed availability */
 @keyframes live-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 oklch(0.58 0.13 162 / 0.6); }
-  50% { box-shadow: 0 0 0 6px oklch(0.58 0.13 162 / 0); }
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 oklch(0.58 0.13 162 / 0.6);
+  }
+  50% {
+    box-shadow: 0 0 0 6px oklch(0.58 0.13 162 / 0);
+  }
 }
 .live-dot {
-  width: 6px; height: 6px; border-radius: 9999px;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
   background: var(--color-success);
   animation: live-pulse 1.8s ease-out infinite;
-  display: inline-block; flex-shrink: 0;
+  display: inline-block;
+  flex-shrink: 0;
 }
 
 /* SOS pulsing rings */
 @keyframes sos-ring {
-  0% { transform: scale(0.8); opacity: 0.8; }
-  100% { transform: scale(2.4); opacity: 0; }
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
 }
-.sos-pulse::before, .sos-pulse::after {
-  content: ''; position: absolute; inset: 0; border-radius: 9999px;
+.sos-pulse::before,
+.sos-pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
   background: var(--color-emergency);
   animation: sos-ring 2s ease-out infinite;
 }
-.sos-pulse::after { animation-delay: 1s; }
+.sos-pulse::after {
+  animation-delay: 1s;
+}
 
 /* SOS button — small pulse for navbar */
 @keyframes sos-btn-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 oklch(0.58 0.21 25 / 0.5); }
-  50% { box-shadow: 0 0 0 6px oklch(0.58 0.21 25 / 0); }
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 oklch(0.58 0.21 25 / 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px oklch(0.58 0.21 25 / 0);
+  }
 }
-.sos-btn { animation: sos-btn-pulse 2s ease-out infinite; }
+.sos-btn {
+  animation: sos-btn-pulse 2s ease-out infinite;
+}
 
 /* Skeleton shimmer */
-@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
 .skeleton {
-  background: linear-gradient(90deg, var(--color-muted) 0%, var(--color-border) 50%, var(--color-muted) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--color-muted) 0%,
+    var(--color-border) 50%,
+    var(--color-muted) 100%
+  );
   background-size: 200% 100%;
   animation: shimmer 1.6s linear infinite;
   border-radius: var(--radius-md);
@@ -192,92 +242,138 @@
 /* Map placeholder dotted background */
 .map-bg {
   background-color: oklch(0.93 0.01 200);
-  background-image:
-    radial-gradient(circle at 1px 1px, oklch(0.85 0.02 200) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, oklch(0.85 0.02 200) 1px, transparent 0);
   background-size: 18px 18px;
 }
 
 /* Animated sky/mint hero — bolder visible motion */
 @keyframes sky-drift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 @keyframes sky-sweep {
-  0%   { transform: translateX(-60%) skewX(-14deg); }
-  100% { transform: translateX(180%) skewX(-14deg); }
+  0% {
+    transform: translateX(-60%) skewX(-14deg);
+  }
+  100% {
+    transform: translateX(180%) skewX(-14deg);
+  }
 }
 @keyframes sky-blob-a {
-  0%, 100% { transform: translate(0%, 0%) scale(1); }
-  50%      { transform: translate(-18%, 12%) scale(1.25); }
+  0%,
+  100% {
+    transform: translate(0%, 0%) scale(1);
+  }
+  50% {
+    transform: translate(-18%, 12%) scale(1.25);
+  }
 }
 @keyframes sky-blob-b {
-  0%, 100% { transform: translate(0%, 0%) scale(1); }
-  50%      { transform: translate(20%, -14%) scale(1.2); }
+  0%,
+  100% {
+    transform: translate(0%, 0%) scale(1);
+  }
+  50% {
+    transform: translate(20%, -14%) scale(1.2);
+  }
 }
 .hero-sky {
   position: relative;
-  background:
-    linear-gradient(125deg,
-      oklch(0.95 0.06 195) 0%,
-      oklch(0.90 0.09 200) 20%,
-      oklch(0.93 0.08 220) 40%,
-      oklch(0.88 0.10 190) 60%,
-      oklch(0.92 0.08 215) 80%,
-      oklch(0.95 0.06 200) 100%);
+  background: linear-gradient(
+    125deg,
+    oklch(0.95 0.06 195) 0%,
+    oklch(0.9 0.09 200) 20%,
+    oklch(0.93 0.08 220) 40%,
+    oklch(0.88 0.1 190) 60%,
+    oklch(0.92 0.08 215) 80%,
+    oklch(0.95 0.06 200) 100%
+  );
   background-size: 400% 400%;
   animation: sky-drift 10s ease-in-out infinite;
 }
 /* faint grid overlay */
 .hero-sky > .grid-overlay,
 .hero-sky::before {
-  content: '';
-  position: absolute; inset: 0; pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 .hero-sky::before {
   background-image:
-    linear-gradient(to right, oklch(0.40 0.10 210 / 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.40 0.10 210 / 0.08) 1px, transparent 1px);
+    linear-gradient(to right, oklch(0.4 0.1 210 / 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.4 0.1 210 / 0.08) 1px, transparent 1px);
   background-size: 42px 42px;
 }
 /* moving glow blobs */
 .hero-sky .sky-blob {
-  position: absolute; pointer-events: none; border-radius: 9999px;
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
   filter: blur(60px);
 }
 .hero-sky .sky-blob-1 {
-  width: 55%; height: 75%; top: -15%; right: -10%;
+  width: 55%;
+  height: 75%;
+  top: -15%;
+  right: -10%;
   background: oklch(0.92 0.12 195 / 0.85);
   animation: sky-blob-a 9s ease-in-out infinite;
 }
 .hero-sky .sky-blob-2 {
-  width: 50%; height: 70%; bottom: -20%; left: -10%;
-  background: oklch(0.90 0.13 225 / 0.75);
+  width: 50%;
+  height: 70%;
+  bottom: -20%;
+  left: -10%;
+  background: oklch(0.9 0.13 225 / 0.75);
   animation: sky-blob-b 11s ease-in-out infinite;
 }
 /* diagonal light sweep */
 .hero-sky::after {
-  content: '';
-  position: absolute; top: -25%; bottom: -25%; left: 0; width: 40%;
+  content: "";
+  position: absolute;
+  top: -25%;
+  bottom: -25%;
+  left: 0;
+  width: 40%;
   pointer-events: none;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    oklch(1 0 0 / 0.75) 50%,
-    transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, oklch(1 0 0 / 0.75) 50%, transparent 100%);
   filter: blur(28px);
   animation: sky-sweep 6s linear infinite;
 }
 
-
 /* Doctor avatar animations */
 @keyframes doctor-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
-.doctor-float { animation: doctor-float 4s ease-in-out infinite; }
+.doctor-float {
+  animation: doctor-float 4s ease-in-out infinite;
+}
 
 @keyframes stetho-swing {
-  0%, 100% { transform: rotate(-3deg); }
-  50% { transform: rotate(3deg); }
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
 }
-.stetho-swing { animation: stetho-swing 3.5s ease-in-out infinite; transform-origin: 150px 215px; transform-box: fill-box; }
+.stetho-swing {
+  animation: stetho-swing 3.5s ease-in-out infinite;
+  transform-origin: 150px 215px;
+  transform-box: fill-box;
+}
