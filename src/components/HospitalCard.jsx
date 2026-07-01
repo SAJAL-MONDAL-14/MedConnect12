@@ -12,8 +12,12 @@ export function BedChip({ label, count, total, type = "general" }) {
   }[tone];
 
   return (
-    <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium ${styles}`}>
-      <span className="font-mono">{label}: {count === 0 ? "Full" : `${count} free`}</span>
+    <span
+      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium ${styles}`}
+    >
+      <span className="font-mono">
+        {label}: {count === 0 ? "Full" : `${count} free`}
+      </span>
     </span>
   );
 }
@@ -24,7 +28,9 @@ export function HospitalTypeBadge({ type }) {
       ? "bg-primary-soft text-primary"
       : "bg-accent text-accent-foreground border border-border";
   return (
-    <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${styles}`}>
+    <span
+      className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${styles}`}
+    >
       {type}
     </span>
   );
@@ -72,7 +78,9 @@ export function HospitalCard({ hospital, index, onBook }) {
     <div className="group relative bg-card border border-border rounded-lg p-5 hover:shadow-lift transition-all border-l-4 border-l-primary">
       <div className="flex items-start justify-between gap-3 mb-2">
         <div className="flex items-center gap-2 flex-wrap">
-          {index !== undefined && <span className="font-mono text-xs text-text-muted">#{index + 1}</span>}
+          {index !== undefined && (
+            <span className="font-mono text-xs text-text-muted">#{index + 1}</span>
+          )}
           <h3 className="font-semibold text-[15px] text-foreground">{hospital.name}</h3>
           <HospitalTypeBadge type={hospital.type} />
           {hospital.verified && <VerifiedBadge />}
@@ -86,7 +94,8 @@ export function HospitalCard({ hospital, index, onBook }) {
 
       {hospital.specialties.length > 0 && (
         <p className="text-xs text-text-muted mb-3 truncate">
-          <span className="text-muted-foreground">Specialties:</span> {hospital.specialties.slice(0, 4).join(" · ")}
+          <span className="text-muted-foreground">Specialties:</span>{" "}
+          {hospital.specialties.slice(0, 4).join(" · ")}
         </p>
       )}
 

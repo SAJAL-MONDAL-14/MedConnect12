@@ -82,7 +82,13 @@ export function DoctorAvatar() {
           <ellipse cx="150" cy="405" rx="90" ry="10" fill="#0c2340" opacity="0.18" />
 
           {/* BODY (coat) */}
-          <g style={{ transform: `rotate(${bodyRot}deg)`, transformOrigin: "150px 240px", transition: "transform 200ms ease-out" }}>
+          <g
+            style={{
+              transform: `rotate(${bodyRot}deg)`,
+              transformOrigin: "150px 240px",
+              transition: "transform 200ms ease-out",
+            }}
+          >
             {/* Scrub top under coat */}
             <path d="M95 215 Q150 200 205 215 L215 360 Q150 380 85 360 Z" fill="url(#scrubGrad)" />
             {/* Coat */}
@@ -126,17 +132,35 @@ export function DoctorAvatar() {
             {/* Neck */}
             <rect x="138" y="180" width="24" height="22" fill="url(#skinGrad)" />
             {/* Hair back */}
-            <path d="M85 130 Q90 60 150 55 Q210 60 215 130 L215 210 Q200 175 195 175 L105 175 Q100 175 85 210 Z" fill="url(#hairGrad)" />
+            <path
+              d="M85 130 Q90 60 150 55 Q210 60 215 130 L215 210 Q200 175 195 175 L105 175 Q100 175 85 210 Z"
+              fill="url(#hairGrad)"
+            />
             {/* Face */}
             <ellipse cx="150" cy="135" rx="48" ry="55" fill="url(#skinGrad)" />
             {/* Hair fringe */}
-            <path d="M105 110 Q130 80 150 95 Q170 80 195 110 Q190 125 170 118 Q150 108 130 118 Q110 125 105 110 Z" fill="url(#hairGrad)" />
+            <path
+              d="M105 110 Q130 80 150 95 Q170 80 195 110 Q190 125 170 118 Q150 108 130 118 Q110 125 105 110 Z"
+              fill="url(#hairGrad)"
+            />
             {/* Cheeks */}
             <ellipse cx="122" cy="148" rx="10" ry="6" fill="url(#cheek)" />
             <ellipse cx="178" cy="148" rx="10" ry="6" fill="url(#cheek)" />
             {/* Eyebrows */}
-            <path d="M125 122 Q133 118 142 122" stroke="#2a1810" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-            <path d="M158 122 Q167 118 175 122" stroke="#2a1810" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+            <path
+              d="M125 122 Q133 118 142 122"
+              stroke="#2a1810"
+              strokeWidth="2.5"
+              fill="none"
+              strokeLinecap="round"
+            />
+            <path
+              d="M158 122 Q167 118 175 122"
+              stroke="#2a1810"
+              strokeWidth="2.5"
+              fill="none"
+              strokeLinecap="round"
+            />
             {/* Eyes */}
             <g>
               <ellipse cx="133" cy="135" rx="5" ry="6" fill="#fff" />
@@ -147,9 +171,21 @@ export function DoctorAvatar() {
               <circle cx={168 + eyeX} cy={134 + eyeY} r="0.9" fill="#fff" />
             </g>
             {/* Nose */}
-            <path d="M150 142 Q148 152 152 156" stroke="#d49a78" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+            <path
+              d="M150 142 Q148 152 152 156"
+              stroke="#d49a78"
+              strokeWidth="1.8"
+              fill="none"
+              strokeLinecap="round"
+            />
             {/* Mouth */}
-            <path d="M141 165 Q150 172 159 165" stroke="#a8324a" strokeWidth="2.2" fill="none" strokeLinecap="round" />
+            <path
+              d="M141 165 Q150 172 159 165"
+              stroke="#a8324a"
+              strokeWidth="2.2"
+              fill="none"
+              strokeLinecap="round"
+            />
             {/* Head mirror band (doctor) */}
             <path d="M102 100 Q150 78 198 100" stroke="#cfd8e3" strokeWidth="3" fill="none" />
             <circle cx="150" cy="86" r="6" fill="#e2e8f0" stroke="#94a3b8" strokeWidth="1.5" />
