@@ -1,12 +1,81 @@
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import api from "@/lib/api";
 import { Logo } from "@/components/Navbar";
 import { Mail, Lock, Stethoscope } from "lucide-react";
 
 export default function PrivateChamberLogin() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("dr.kapoor@skincare.in");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [shouldLogin, setShouldLogin] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
     document.title = "Private chamber login — MedConnect";
   }, []);
+
+  // Email validation effect
+  useEffect(() => {
+    if (!email) {
+      setEmailError("");
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError("Please enter a valid email address.");
+    } else {
+      setEmailError("");
+    }
+  }, [email]);
+
+  // Password validation effect
+  useEffect(() => {
+    if (!password) {
+      setPasswordError("");
+      return;
+    }
+    if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters.");
+    } else {
+      setPasswordError("");
+    }
+  }, [password]);
+
+  // Login API effect
+  useEffect(() => {
+    if (!shouldLogin) return;
+
+    const performLogin = async () => {
+      setIsSubmitting(true);
+      try {
+        const response = await api.post("/api/clinic/login", {
+          gmail: email,
+          password: password,
+        });
+
+        if (response.data.success) {
+          const { clinic, accessToken } = response.data.data;
+          localStorage.setItem("clinic_doctor", clinic);
+          localStorage.setItem("accessToken", accessToken);
+          navigate("/private-chamber/dashboard");
+        } else {
+          alert(response.data.error || "Login failed.");
+        }
+      } catch (err) {
+        console.error(err);
+        alert(err.response?.data?.error || err.message || "An error occurred during login.");
+      } finally {
+        setIsSubmitting(false);
+        setShouldLogin(false);
+      }
+    };
+
+    performLogin();
+  }, [shouldLogin, email, password, navigate]);
+
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
       <div className="hidden lg:flex flex-col justify-between p-10 text-white relative overflow-hidden bg-gradient-to-br from-primary via-primary-dark to-foreground">
@@ -55,37 +124,53 @@ export default function PrivateChamberLogin() {
           <div className="space-y-3">
             <div>
               <label className="block text-xs text-muted-foreground mb-1.5 font-medium">
-                Email or phone
+                Email
               </label>
-              <div className="flex items-center gap-2 rounded-md border border-border bg-input px-3 focus-within:border-primary">
+              <div
+                className={`flex items-center gap-2 rounded-md border bg-input px-3 transition ${emailError ? "border-emergency" : "focus-within:border-primary"}`}
+              >
                 <Mail className="h-4 w-4 text-muted-foreground" />
                 <input
                   type="email"
-                  defaultValue="dr.kapoor@skincare.in"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="dr.kapoor@skincare.in"
                   className="flex-1 bg-transparent py-2.5 text-sm outline-none"
                 />
               </div>
+              {emailError && (
+                <p className="text-emergency text-[11px] mt-1 font-medium">{emailError}</p>
+              )}
             </div>
             <div>
               <label className="block text-xs text-muted-foreground mb-1.5 font-medium">
                 Password
               </label>
-              <div className="flex items-center gap-2 rounded-md border border-border bg-input px-3 focus-within:border-primary">
+              <div
+                className={`flex items-center gap-2 rounded-md border bg-input px-3 transition ${passwordError ? "border-emergency" : "focus-within:border-primary"}`}
+              >
                 <Lock className="h-4 w-4 text-muted-foreground" />
                 <input
                   type="password"
-                  defaultValue="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
                   className="flex-1 bg-transparent py-2.5 text-sm outline-none font-mono"
                 />
               </div>
+              {passwordError && (
+                <p className="text-emergency text-[11px] mt-1 font-medium">{passwordError}</p>
+              )}
             </div>
           </div>
-          <Link
-            to="/private-chamber/dashboard"
-            className="mt-5 block text-center rounded-md bg-primary text-primary-foreground py-2.5 text-sm font-semibold hover:bg-primary-dark transition"
+          <button
+            type="button"
+            disabled={isSubmitting || !email || !password || emailError || passwordError}
+            onClick={() => setShouldLogin(true)}
+            className="mt-5 w-full block text-center rounded-md bg-primary text-primary-foreground py-2.5 text-sm font-semibold hover:bg-primary-dark transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Sign in to chamber
-          </Link>
+            {isSubmitting ? "Signing in..." : "Sign in to chamber"}
+          </button>
           <div className="mt-4 flex justify-between text-xs">
             <Link to="/login" className="text-muted-foreground hover:text-foreground">
               Patient login
