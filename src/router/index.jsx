@@ -2,6 +2,7 @@ import React, { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import App from "@/App";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import ChamberProtectedRoute from "@/components/ChamberProtectedRoute";
 
 // ─── Lazy Loaded Page Components ─────────────────────────────────────────────
 // Flat Pages
@@ -110,7 +111,14 @@ export const router = createBrowserRouter([
       // Private Chamber portals
       { path: "private-chamber/register", element: <PrivateChamberRegister /> },
       { path: "private-chamber/login", element: <PrivateChamberLogin /> },
-      { path: "private-chamber/dashboard", element: <PrivateChamberDashboard /> },
+      {
+        path: "private-chamber/dashboard",
+        element: (
+          <ChamberProtectedRoute>
+            <PrivateChamberDashboard />
+          </ChamberProtectedRoute>
+        ),
+      },
 
       // Staff portals
       { path: "staff/login", element: <StaffLogin /> },

@@ -140,7 +140,7 @@ export default function PrivateChamberRegister() {
     const verifyOtp = async () => {
       setOtpError("");
       try {
-        const response = await api.post("/api/clinic/verify-otp", {
+        const response = await api.post("/api/private-chamber/verify-otp", {
           gmail: form.email,
           otp: enteredOtp,
         });
@@ -193,7 +193,7 @@ export default function PrivateChamberRegister() {
           about_of_clinic: form.about,
         };
 
-        const response = await api.post("/api/clinic/register", payload);
+        const response = await api.post("/api/private-chamber/register", payload);
 
         if (response.data.success) {
           try {
@@ -243,7 +243,7 @@ export default function PrivateChamberRegister() {
 
     setIsSendingOtp(true);
     try {
-      const response = await api.post("/api/clinic/send-otp", {
+      const response = await api.post("/api/private-chamber/send-otp", {
         gmail: form.email,
       });
 
