@@ -1,5 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, replace } from "react-router-dom";
 import { useState, Fragment, useEffect } from "react";
+import api from "@/lib/api";
+import { useNavigate } from "react-router-dom";
+
 import {
   LayoutDashboard,
   CalendarCheck,
@@ -30,10 +33,40 @@ const navItems = [
 
 export default function PrivateChamberDashboard() {
   const [view, setView] = useState("Dashboard");
+  const navigate = useNavigate();
+  const [doctor, setDoctor] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("clinic_doctor")) || {};
+    } catch {
+      return {};
+    }
+  });
 
   useEffect(() => {
     document.title = "Chamber dashboard — MedConnect";
   }, []);
+
+  const handleLogout = async () => {
+    try {
+      await api.post("/api/private-chamber/logout");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    } finally {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("clinic_doctor");
+      delete api.defaults.headers.common["Authorization"];
+      navigate("/private-chamber/login", { replace: true });
+    }
+  };
+
+  const initials = doctor.owner_doctor_name
+    ? doctor.owner_doctor_name
+        .split(" ")
+        .filter(Boolean)
+        .map((n) => n[0])
+        .join("")
+        .toUpperCase()
+    : "DR";
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -48,11 +81,13 @@ export default function PrivateChamberDashboard() {
         </div>
         <div className="p-4 border-b border-white/10 flex items-center gap-2.5">
           <div className="h-9 w-9 rounded-full bg-white/15 backdrop-blur flex items-center justify-center text-xs font-bold ring-2 ring-white/20">
-            AK
+            {initials}
           </div>
           <div className="min-w-0">
-            <div className="text-xs font-semibold truncate">Dr. Anil Kapoor</div>
-            <div className="text-[10px] text-white/60">Private Chamber</div>
+            <div className="text-xs font-semibold truncate">Dr. {doctor.owner_doctor_name}</div>
+            <div className="text-[10px] text-white/60">
+              {doctor.speciality || "Private Chamber"}
+            </div>
           </div>
         </div>
         <nav className="flex-1 py-3">
@@ -68,6 +103,7 @@ export default function PrivateChamberDashboard() {
         </nav>
         <Link
           to="/login"
+          onClick={() => handleLogout()}
           className="m-4 inline-flex items-center gap-2 text-xs text-white/70 hover:text-white"
         >
           <LogOut className="h-4 w-4" /> Logout
@@ -78,9 +114,13 @@ export default function PrivateChamberDashboard() {
         <header className="bg-card border-b border-border h-16 flex items-center justify-between px-6 sticky top-0 z-30">
           <div>
             <div className="font-semibold">
-              {view === "Dashboard" ? "Welcome back, Dr. Kapoor 👨‍⚕️" : view}
+              {view === "Dashboard"
+                ? `Welcome back, Dr. ${doctor.owner_doctor_name || ""} 👨‍⚕️`
+                : view}
             </div>
-            <div className="text-xs text-muted-foreground">Private Chamber · Siliguri</div>
+            <div className="text-xs text-muted-foreground">
+              {doctor.clinic_name || "Private Chamber"} · {doctor.city || ""}
+            </div>
           </div>
           <div className="flex items-center gap-3">
             <span className="hidden sm:inline-flex items-center gap-1.5 text-xs text-success">
@@ -110,7 +150,7 @@ export default function PrivateChamberDashboard() {
           {view === "Schedule" && <ScheduleView />}
           {view === "Earnings" && <EarningsView />}
           {view === "Reviews" && <ReviewsView />}
-          {view === "Settings" && <SettingsView />}
+          {view === "Settings" && <SettingsView doctor={doctor} setDoctor={setDoctor} />}
         </main>
       </div>
     </div>
@@ -594,9 +634,38 @@ function ReviewsView() {
   );
 }
 
-function SettingsView() {
-  const [name, setName] = useState("Dr. Kapoor's Chamber");
-  const [fee, setFee] = useState("600");
+function SettingsView({ doctor, setDoctor }) {
+  const [name, setName] = useState(doctor.clinic_name || "");
+  const [fee, setFee] = useState(doctor.consultations_fee?.toString() || "");
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    try {
+      const response = await api.patch(`/api/private-chamber/update-clinic/${doctor.id}`, {
+        clinic_name: name,
+        consultations_fee: parseFloat(fee) || 0,
+      });
+      if (response.data.success) {
+        const updatedDoctor = {
+          ...doctor,
+          clinic_name: name,
+          consultations_fee: parseFloat(fee) || 0,
+        };
+        localStorage.setItem("clinic_doctor", JSON.stringify(updatedDoctor));
+        setDoctor(updatedDoctor);
+        alert("Chamber settings updated successfully!");
+      } else {
+        alert(response.data.error || "Failed to save changes.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert(error.response?.data?.error || error.message || "Failed to update settings.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   return (
     <div className="rounded-xl bg-card border border-border p-6 space-y-4 max-w-2xl">
       <h2 className="font-semibold text-lg flex items-center gap-2">
@@ -622,8 +691,12 @@ function SettingsView() {
           className="w-full rounded-md bg-input border border-border px-3 py-2 text-sm outline-none focus:border-primary font-mono"
         />
       </div>
-      <button className="rounded-md bg-primary text-primary-foreground px-4 py-2 text-sm font-semibold">
-        Save changes
+      <button
+        onClick={handleSave}
+        disabled={isSaving}
+        className="rounded-md bg-primary text-primary-foreground px-4 py-2 text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {isSaving ? "Saving..." : "Save changes"}
       </button>
     </div>
   );

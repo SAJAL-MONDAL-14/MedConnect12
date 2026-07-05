@@ -51,14 +51,14 @@ export default function PrivateChamberLogin() {
     const performLogin = async () => {
       setIsSubmitting(true);
       try {
-        const response = await api.post("/api/clinic/login", {
+        const response = await api.post("/api/private-chamber/login", {
           gmail: email,
           password: password,
         });
 
         if (response.data.success) {
           const { clinic, accessToken } = response.data.data;
-          localStorage.setItem("clinic_doctor", clinic);
+          localStorage.setItem("clinic_doctor", JSON.stringify(clinic));
           localStorage.setItem("accessToken", accessToken);
           navigate("/private-chamber/dashboard");
         } else {

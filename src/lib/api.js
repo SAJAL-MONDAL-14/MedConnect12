@@ -12,6 +12,17 @@ const api = axios.create({
 let isRefreshing = false;
 let failedQueue = [];
 
+const processQueue = (error, token = null) => {
+  failedQueue.forEach((prom) => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
+  failedQueue = [];
+};
+
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("accessToken");
@@ -48,7 +59,7 @@ api.interceptors.response.use(
       try {
         // Fire request to refresh the token (cookie is automatically sent)
         const refreshResponse = await axios.post(
-          `${api.defaults.baseURL}/api/clinic/refresh`,
+          `${api.defaults.baseURL}/api/private-chamber/refresh`,
           {},
           { withCredentials: true },
         );
