@@ -143,12 +143,12 @@ export default function HospitalDoctorDashboard() {
       {/* Main content */}
       <div className="flex-1 min-w-0">
         {/* Header */}
-        <header className="bg-card border-b border-border h-16 flex items-center justify-between px-6 sticky top-0 z-30">
-          <div>
+        <header className="bg-card border-b border-border h-16 flex items-center justify-between gap-3 px-4 sm:px-6 sticky top-0 z-30">
+          <div className="min-w-0">
             <div className="font-semibold">
               {view === "Dashboard" ? "Good morning, Dr. Sharma 🩺" : view}
             </div>
-            <div className="text-xs text-muted-foreground">Cardiologist · North Bengal Medical College · OPD Block, Room 4</div>
+            <div className="text-xs text-muted-foreground truncate">Cardiologist · North Bengal Medical College · OPD Block, Room 4</div>
           </div>
           <div className="flex items-center gap-3">
             <span className="hidden sm:inline-flex items-center gap-1.5 text-xs text-success">
@@ -163,7 +163,7 @@ export default function HospitalDoctorDashboard() {
         </header>
 
         {/* Mobile nav */}
-        <div className="md:hidden flex overflow-x-auto bg-card border-b border-border px-3">
+        <div className="md:hidden flex overflow-x-auto bg-card border-b border-border px-2 snap-x">
           {navItems.map((n) => (
             <button
               key={n.label}
@@ -177,7 +177,7 @@ export default function HospitalDoctorDashboard() {
           ))}
         </div>
 
-        <main className="p-6 space-y-6">
+        <main className="p-4 sm:p-6 space-y-5 sm:space-y-6">
           {view === "Dashboard" && <DashboardView setView={setView} />}
           {view === "My Appointments" && <AppointmentsView />}
           {view === "My Patients" && <PatientsView />}

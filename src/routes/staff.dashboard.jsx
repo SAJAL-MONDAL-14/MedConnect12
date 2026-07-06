@@ -43,7 +43,7 @@ export default function StaffDashboard() {
       </aside>
 
       <div className="flex-1 min-w-0">
-        <header className="bg-card border-b border-border h-16 flex items-center justify-between px-6 sticky top-0 z-30">
+        <header className="bg-card border-b border-border h-16 flex items-center justify-between px-4 sm:px-6 sticky top-0 z-30">
           <div>
             <div className="font-semibold">{view === "Dashboard" ? "Good morning, Ravi 👋" : view}</div>
             <div className="text-xs text-muted-foreground">North Bengal Medical College</div>
@@ -58,7 +58,7 @@ export default function StaffDashboard() {
             <button key={n.label} onClick={() => setView(n.label)} className={`shrink-0 px-3 py-2.5 text-xs font-medium border-b-2 ${view === n.label ? "border-primary text-primary" : "border-transparent text-muted-foreground"}`}>{n.label}</button>
           ))}
         </div>
-        <main className="p-6 space-y-6">
+        <main className="p-4 sm:p-6 space-y-5 sm:space-y-6">
           {view === "Dashboard" && <DashboardView />}
           {view === "Availability" && <AvailabilityView />}
           {view === "Appointments" && <AppointmentsView />}
@@ -81,7 +81,7 @@ const stats = [
 function DashboardView() {
   return (
     <>
-      <div className="rounded-2xl p-6 text-white relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
+      <div className="rounded-2xl p-5 sm:p-6 text-white relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
         <div className="absolute right-0 top-0 h-full w-1/3 opacity-10" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
         <div className="relative flex items-start justify-between flex-wrap gap-4">
           <div>
@@ -95,7 +95,7 @@ function DashboardView() {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((s) => (
           <div key={s.label} className="rounded-xl bg-card border border-border p-4 shadow-card hover:shadow-lg hover:-translate-y-0.5 transition">
             <div className={`h-9 w-9 rounded-lg flex items-center justify-center bg-${s.tone}-soft text-${s.tone}`}><s.icon className="h-4 w-4" /></div>
@@ -119,8 +119,8 @@ function AvailabilityView({ compact = false }) {
   const [savedAt, setSavedAt] = useState("2 min ago");
   const save = () => setSavedAt("just now");
   return (
-    <div className="rounded-xl bg-card border border-border p-6 mt-4">
-      <div className="flex items-center justify-between mb-5">
+    <div className="rounded-xl bg-card border border-border p-4 sm:p-6 mt-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-5">
         <div>
           <h2 className="font-semibold text-lg">{compact ? "Update availability" : "Availability control"}</h2>
           <p className="text-xs text-muted-foreground">Changes broadcast instantly to patient apps.</p>
@@ -143,16 +143,16 @@ function AvailabilityView({ compact = false }) {
 function BedRow({ label, desc, value, setValue, total, color }) {
   const pct = Math.round((value / total) * 100);
   return (
-    <div className="flex items-center justify-between gap-4">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div className="flex-1">
         <div className="font-semibold">{label}</div>
         <div className="text-xs text-muted-foreground">{desc}</div>
-        <div className="mt-2 h-1.5 w-48 bg-muted rounded-full overflow-hidden">
+        <div className="mt-2 h-1.5 w-full max-w-48 bg-muted rounded-full overflow-hidden">
           <div className={`h-full bg-${color} rounded-full transition-all`} style={{ width: `${pct}%` }} />
         </div>
         <div className="text-[10px] text-text-muted mt-1 font-mono">{value} / {total} beds</div>
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 self-end sm:self-auto">
         <button onClick={() => setValue(Math.max(0, value - 1))} className="h-9 w-9 rounded-full border border-border bg-card hover:border-primary flex items-center justify-center"><Minus className="h-4 w-4" /></button>
         <div className={`text-3xl font-bold font-mono w-12 text-center text-${color}`}>{value}</div>
         <button onClick={() => setValue(Math.min(total, value + 1))} className="h-9 w-9 rounded-full border border-border bg-card hover:border-primary flex items-center justify-center"><Plus className="h-4 w-4" /></button>

@@ -48,7 +48,17 @@ const STEPS = [
 // ── Sub-components ─────────────────────────────────────────────────────────────
 function StepBar({ current }) {
   return (
-    <div className="flex items-center mb-8 overflow-x-auto pb-1 gap-0">
+    <>
+    <div className="sm:hidden mb-6 rounded-xl border border-border bg-card p-3 shadow-card">
+      <div className="flex items-center justify-between gap-3 text-sm">
+        <span className="font-semibold">Step {current} of {STEPS.length}</span>
+        <span className="text-primary font-medium">{STEPS[current - 1].label}</span>
+      </div>
+      <div className="mt-3 h-2 rounded-full bg-muted overflow-hidden">
+        <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${(current / STEPS.length) * 100}%` }} />
+      </div>
+    </div>
+    <div className="hidden sm:flex items-center mb-8 overflow-x-auto pb-1 gap-0">
       {STEPS.map((s,i)=>(
         <div key={s.n} className="flex items-center shrink-0">
           <div className="flex flex-col items-center">
@@ -69,6 +79,7 @@ function StepBar({ current }) {
         </div>
       ))}
     </div>
+    </>
   );
 }
 
@@ -258,18 +269,18 @@ export default function HospitalDoctorCompleteProfile() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border bg-card/80 backdrop-blur sticky top-0 z-30">
-        <div className="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
           <Logo/>
-          <div className="flex items-center gap-2 rounded-full bg-secondary border border-border px-3 py-1.5">
+          <div className="flex items-center gap-2 rounded-full bg-secondary border border-border px-3 py-1.5 min-w-0 max-w-[210px] sm:max-w-none">
             <Building2 className="h-3.5 w-3.5 text-primary"/>
-            <span className="text-xs font-medium">{ADMIN_PRE_FILLED.hospital}</span>
+            <span className="text-xs font-medium truncate">{ADMIN_PRE_FILLED.hospital}</span>
           </div>
         </div>
       </header>
 
       {/* Hero */}
       <div className="bg-gradient-to-br from-primary-soft via-background to-background border-b border-border">
-        <div className="max-w-3xl mx-auto px-6 py-8">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
           <div className="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full bg-card border border-border text-muted-foreground mb-3">
             <ShieldCheck className="h-3.5 w-3.5 text-success"/> First-time login — account activation
           </div>
@@ -287,7 +298,7 @@ export default function HospitalDoctorCompleteProfile() {
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-6 py-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
         <StepBar current={step}/>
 
         <div className="bg-card border border-border rounded-2xl p-6 md:p-8">

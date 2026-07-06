@@ -27,16 +27,16 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="max-w-[700px] mx-auto px-4 sm:px-6 py-6">
-        <div className="rounded-xl bg-card border border-border p-5 flex items-center gap-4">
+        <div className="rounded-xl bg-card border border-border p-4 sm:p-5 flex items-center gap-3 sm:gap-4 flex-wrap">
           <div className="h-14 w-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-lg">RD</div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
-              <h1 className="font-bold text-lg">Rahul Das</h1>
+              <h1 className="font-bold text-lg truncate">Rahul Das</h1>
               <VerifiedBadge />
             </div>
             <div className="text-sm text-muted-foreground font-mono">+91 98765 43210</div>
           </div>
-          <button className="text-primary text-sm inline-flex items-center gap-1 hover:underline"><Pencil className="h-3.5 w-3.5" /> Edit</button>
+          <button className="ml-auto text-primary text-sm inline-flex items-center gap-1 hover:underline"><Pencil className="h-3.5 w-3.5" /> Edit</button>
         </div>
 
         <div className="sticky top-16 bg-background z-20 border-b border-border mt-4 -mx-4 sm:-mx-6 px-4 sm:px-6">
@@ -53,10 +53,10 @@ export default function ProfilePage() {
               <div>
                 <h2 className="text-xs uppercase tracking-wider text-text-muted mb-2">Upcoming</h2>
                 <div className="rounded-xl bg-card border border-border border-l-4 border-l-success p-4">
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <div>
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+                    <div className="min-w-0">
                       <div className="font-semibold">{myBookings[0].doctor}</div>
-                      <div className="text-xs text-muted-foreground">{myBookings[0].specialty} · {myBookings[0].hospital}</div>
+                        <div className="text-xs text-muted-foreground break-words">{myBookings[0].specialty} · {myBookings[0].hospital}</div>
                     </div>
                     <span className="rounded-full bg-success-soft text-success px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider">Confirmed</span>
                   </div>

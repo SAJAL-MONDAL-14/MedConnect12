@@ -34,7 +34,7 @@ function BedCounter({ label, desc, occupied, total, color, onChange }) {
   const pct  = Math.round((occupied / total) * 100);
   return (
     <div className="rounded-xl bg-card border border-border p-5">
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div className="flex-1">
           <div className="font-semibold text-sm">{label}</div>
           <div className="text-xs text-muted-foreground">{desc}</div>
@@ -50,7 +50,7 @@ function BedCounter({ label, desc, occupied, total, color, onChange }) {
             {occupied}/{total} occupied · <span className={free === 0 ? "text-emergency font-bold" : "text-success font-semibold"}>{free === 0 ? "FULL" : `${free} free`}</span>
           </div>
         </div>
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center justify-end gap-2 shrink-0">
           <button
             onClick={() => onChange(Math.max(0, occupied - 1))}
             className="h-9 w-9 rounded-full border border-border bg-card hover:border-success flex items-center justify-center transition"
@@ -149,13 +149,13 @@ export default function WardDashboard() {
 
       <div className="flex-1 min-w-0">
         {/* Header */}
-        <header className="bg-card border-b border-border h-16 flex items-center justify-between px-6 sticky top-0 z-30">
-          <div>
-            <div className="font-semibold">{view === "Dashboard" ? "Good morning, Ravi 👋" : view}</div>
-            <div className="text-xs text-muted-foreground">Ward Staff · North Bengal Medical College</div>
+        <header className="bg-card border-b border-border h-16 flex items-center justify-between gap-3 px-4 sm:px-6 sticky top-0 z-30">
+          <div className="min-w-0">
+            <div className="font-semibold truncate">{view === "Dashboard" ? "Good morning, Ravi 👋" : view}</div>
+            <div className="text-xs text-muted-foreground truncate">Ward Staff · North Bengal Medical College</div>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-xs text-success inline-flex items-center gap-1.5"><span className="live-dot" /> Live connected</span>
+            <span className="hidden sm:inline-flex text-xs text-success items-center gap-1.5"><span className="live-dot" /> Live connected</span>
             {criticalIcu > 0 && (
               <span className="inline-flex items-center gap-1 rounded-full bg-emergency-soft text-emergency px-2.5 py-1 text-[10px] font-bold">
                 <AlertCircle className="h-3 w-3" /> {criticalIcu} ICU full
@@ -169,7 +169,7 @@ export default function WardDashboard() {
         </header>
 
         {/* Mobile tabs */}
-        <div className="md:hidden flex overflow-x-auto bg-card border-b border-border px-3">
+        <div className="md:hidden flex overflow-x-auto bg-card border-b border-border px-2 snap-x">
           {navItems.map((n) => (
             <button key={n.label} onClick={() => setView(n.label)}
               className={`shrink-0 px-3 py-2.5 text-xs font-medium border-b-2
@@ -181,7 +181,7 @@ export default function WardDashboard() {
 
         {/* Broadcast banner */}
         <div className="bg-success-soft border-b border-success/20">
-          <div className="max-w-full px-6 py-2 flex items-center justify-between text-xs">
+          <div className="max-w-full px-4 sm:px-6 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-xs">
             <span className="text-success inline-flex items-center gap-1.5">
               <CheckCircle2 className="h-3.5 w-3.5" /> Patients see your updates in real-time · Last sync: {savedAt}
             </span>
@@ -191,9 +191,9 @@ export default function WardDashboard() {
           </div>
         </div>
 
-        <main className="p-6 space-y-6">
+        <main className="p-4 sm:p-6 space-y-5 sm:space-y-6">
           {/* Overview cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {[
               { label: "General beds free", value: totalGenFree, total: wards.reduce((s,w)=>s+w.total,0), tone: totalGenFree <= 5 ? "emergency" : "success", icon: BedDouble },
               { label: "ICU beds free",     value: totalIcuFree, total: icus.reduce((s,i)=>s+i.total,0),  tone: totalIcuFree === 0 ? "emergency" : totalIcuFree <= 2 ? "warning" : "success", icon: Activity },
@@ -212,8 +212,8 @@ export default function WardDashboard() {
           </div>
 
           {/* General beds */}
-          <div className="rounded-xl bg-card border border-border p-6">
-            <div className="flex items-center justify-between mb-4">
+          <div className="rounded-xl bg-card border border-border p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
               <div>
                 <h2 className="font-semibold text-lg">General ward beds</h2>
                 <p className="text-xs text-muted-foreground">Use +/− to update occupied count. Changes broadcast instantly.</p>
@@ -236,7 +236,7 @@ export default function WardDashboard() {
           </div>
 
           {/* ICU */}
-          <div className="rounded-xl bg-card border border-border p-6">
+          <div className="rounded-xl bg-card border border-border p-4 sm:p-6">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h2 className="font-semibold text-lg">ICU beds</h2>

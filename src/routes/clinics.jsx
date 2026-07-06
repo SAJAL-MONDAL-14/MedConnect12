@@ -27,12 +27,12 @@ export default function ClinicsPage() {
       <Navbar active="clinics" />
       <section className="relative overflow-hidden border-b border-border" style={{ background: "var(--gradient-hero)" }}>
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 20% 50%, white 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-        <div className="relative max-w-[1200px] mx-auto px-6 py-14 text-white">
+        <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 py-14 text-white">
           <div className="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full bg-white/15 backdrop-blur border border-white/20 mb-4">
             <Building className="h-3.5 w-3.5" />
             {clinicDoctors.length} verified independent clinics
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight max-w-2xl">Individual doctor clinics</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight max-w-2xl">Individual doctor clinics</h1>
           <p className="mt-3 text-white/80 max-w-xl">Personal care from independent specialists running their own practice. Book directly — no hospital queues.</p>
           <div className="mt-6 flex flex-col sm:flex-row gap-3 max-w-2xl">
             <div className="relative flex-1">
@@ -45,15 +45,15 @@ export default function ClinicsPage() {
           </div>
         </div>
       </section>
-      <div className="max-w-[1200px] mx-auto px-6 pt-6">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-6">
         <div className="flex flex-wrap gap-2">
           {SPECIALTIES.map((s) => (
             <button key={s} onClick={() => setSpec(s)} className={`px-3.5 py-1.5 rounded-full text-xs font-medium border transition ${spec === s ? "bg-primary text-primary-foreground border-primary" : "bg-card text-muted-foreground border-border hover:border-primary hover:text-primary"}`}>{s}</button>
           ))}
         </div>
       </div>
-      <section className="max-w-[1200px] mx-auto px-6 py-6">
-        <div className="flex items-center justify-between mb-4">
+      <section className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
           <p className="text-sm text-muted-foreground"><span className="font-semibold text-foreground">{list.length}</span> clinics found</p>
           <Link to="/clinic/login" className="text-xs text-primary hover:underline font-medium">Are you a clinic doctor? Login →</Link>
         </div>
@@ -86,7 +86,7 @@ export default function ClinicsPage() {
                     <div className="mt-1 flex items-center gap-1.5 text-[11px] text-muted-foreground"><MapPin className="h-3 w-3" /> {d.address}</div>
                   </div>
                   <div className="mt-3 flex items-center gap-1.5 text-xs text-success"><Clock className="h-3.5 w-3.5" /> Next: {d.nextSlot}</div>
-                  <div className="mt-4 flex gap-2">
+                  <div className="mt-4 grid grid-cols-2 gap-2">
                     <Link to={`/doctors/${d.id}`} className="flex-1 text-center px-3 py-2 rounded-lg border border-border text-sm font-medium hover:border-primary hover:text-primary transition">View profile</Link>
                     <Link to="/booking" className="flex-1 text-center px-3 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition">Book now</Link>
                   </div>

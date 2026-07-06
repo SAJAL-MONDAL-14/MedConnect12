@@ -184,7 +184,7 @@ export default function DoctorOnboardingReview() {
           </div>
 
           {filtered.length === 0 ? (
-            <div className="px-6 py-16 text-center">
+            <div className="px-4 sm:px-6 py-10 sm:py-16 text-center">
               <Stethoscope className="h-10 w-10 mx-auto text-muted-foreground opacity-30 mb-3" />
               <p className="text-sm text-muted-foreground">No applications in this category.</p>
             </div>

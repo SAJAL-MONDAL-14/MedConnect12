@@ -24,7 +24,7 @@ export default function BookingSuccess() {
       <Navbar />
 
       <div className="bg-success-soft border-b border-success/30">
-        <div className="max-w-[900px] mx-auto px-6 py-4 flex items-center gap-3">
+        <div className="max-w-[900px] mx-auto px-4 sm:px-6 py-4 flex items-center gap-3">
           <CheckCircle2 className="h-6 w-6 text-success" />
           <div>
             <div className="font-semibold text-success">Booking confirmed!</div>
@@ -33,7 +33,7 @@ export default function BookingSuccess() {
         </div>
       </div>
 
-      <div className="max-w-[900px] mx-auto px-6 py-10">
+      <div className="max-w-[900px] mx-auto px-4 sm:px-6 py-10">
         <div className="text-center mb-8">
           <div className="mx-auto h-20 w-20 rounded-full bg-success-soft flex items-center justify-center">
             <CheckCircle2 className="h-12 w-12 text-success" strokeWidth={1.8} />

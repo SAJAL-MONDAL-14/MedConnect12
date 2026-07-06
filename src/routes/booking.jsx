@@ -26,7 +26,7 @@ export default function BookingPage() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <div className="max-w-[900px] mx-auto px-6 py-8">
+      <div className="max-w-[900px] mx-auto px-4 sm:px-6 py-8">
         <Link to="/hospital/nbmc" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6">
           <ChevronLeft className="h-4 w-4" /> Back to hospital
         </Link>
@@ -43,7 +43,7 @@ export default function BookingPage() {
             </div>
           ))}
         </div>
-        <div className="grid lg:grid-cols-[1fr_320px] gap-6">
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_320px] gap-6">
           <div className="space-y-4">
             <div className="rounded-xl bg-card border border-border p-5">
               <h2 className="font-semibold mb-4">Appointment</h2>
@@ -54,7 +54,7 @@ export default function BookingPage() {
                   <div className="text-xs text-muted-foreground">Cardiologist · North Bengal Medical College</div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4 pt-4 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 text-sm">
                 <div><div className="text-xs text-muted-foreground mb-1">Date</div><div className="font-medium">Friday, 2 May 2025</div></div>
                 <div><div className="text-xs text-muted-foreground mb-1">Time</div><div className="font-medium font-mono">10:00 AM</div></div>
                 <div><div className="text-xs text-muted-foreground mb-1">Room</div><div className="font-medium">OPD Block, Room 4</div></div>
@@ -84,7 +84,7 @@ export default function BookingPage() {
                   <PayOption selected={pay === "clinic"} onClick={() => setPay("clinic")} icon={<Building2 className="h-5 w-5" />} title="Pay at clinic" desc="Pay ₹500 directly at hospital reception" />
                   <PayOption selected={pay === "online"} onClick={() => setPay("online")} icon={<Wallet className="h-5 w-5" />} title="Pay online (Razorpay)" desc="UPI, Card, Wallet, NetBanking" />
                 </div>
-                <div className="mt-4 flex items-center gap-2">
+                <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-2">
                   <button onClick={() => setStep(1)} className="rounded-md border border-border px-4 py-2.5 text-sm font-medium hover:bg-muted">Back</button>
                   <button onClick={submit} disabled={submitting} className="flex-1 inline-flex items-center justify-center gap-2 rounded-md bg-primary text-primary-foreground py-2.5 text-sm font-semibold hover:bg-primary-dark transition disabled:opacity-70">
                     {submitting ? <><Loader2 className="h-4 w-4 animate-spin" /> Confirming...</> : <><CreditCard className="h-4 w-4" /> Confirm booking</>}

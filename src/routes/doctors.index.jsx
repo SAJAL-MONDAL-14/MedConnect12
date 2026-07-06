@@ -26,7 +26,7 @@ export default function DoctorsPage() {
     <div className="min-h-screen bg-background">
       <Navbar active="doctors" />
       <section className="bg-gradient-to-br from-primary-soft via-background to-background border-b border-border">
-        <div className="max-w-[1200px] mx-auto px-6 py-10">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-10">
           <div className="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full bg-card border border-border text-muted-foreground mb-3">
             <Stethoscope className="h-3.5 w-3.5 text-primary" />
             {doctors.length} verified doctors available today
@@ -50,7 +50,7 @@ export default function DoctorsPage() {
         </div>
       </section>
 
-      <section className="max-w-[1200px] mx-auto px-6 py-8">
+      <section className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8">
         <div className="flex items-center justify-between mb-4">
           <p className="text-sm text-muted-foreground"><span className="font-semibold text-foreground">{list.length}</span> doctors found</p>
         </div>
@@ -77,7 +77,7 @@ export default function DoctorsPage() {
                   </div>
                   {hospital && <p className="mt-3 text-xs text-muted-foreground truncate">at <span className="text-foreground">{hospital.name}</span></p>}
                   <div className="mt-3 flex items-center gap-1.5 text-xs text-success"><Clock className="h-3.5 w-3.5" /> Next: {d.nextSlot}</div>
-                  <div className="mt-4 flex gap-2">
+                  <div className="mt-4 grid grid-cols-2 gap-2">
                     <Link to={`/doctors/${d.id}`} className="flex-1 text-center px-3 py-2 rounded-lg border border-border text-sm font-medium hover:border-primary hover:text-primary transition">View profile</Link>
                     <Link to="/booking" className="flex-1 text-center px-3 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition">Book now</Link>
                   </div>

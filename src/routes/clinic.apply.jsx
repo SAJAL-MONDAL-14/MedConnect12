@@ -58,7 +58,7 @@ export default function ClinicApply() {
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card/80 backdrop-blur sticky top-0 z-30">
-        <div className="max-w-[1100px] mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-[1100px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <Logo />
           <Link to="/clinic/login" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary">
             <ChevronLeft className="h-4 w-4" /> Back to login
@@ -66,7 +66,7 @@ export default function ClinicApply() {
         </div>
       </header>
       <section className="bg-gradient-to-br from-primary-soft via-background to-background border-b border-border">
-        <div className="max-w-[1100px] mx-auto px-6 py-10">
+        <div className="max-w-[1100px] mx-auto px-4 sm:px-6 py-10">
           <div className="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full bg-card border border-border text-muted-foreground mb-3">
             <Building2 className="h-3.5 w-3.5 text-primary" /> Clinic registration
           </div>
@@ -74,7 +74,7 @@ export default function ClinicApply() {
           <p className="mt-2 text-muted-foreground max-w-2xl">Run an independent practice? Reach thousands of patients, manage online bookings, and grow your clinic with our tools — completely free to get started.</p>
         </div>
       </section>
-      <div className="max-w-[1100px] mx-auto px-6 py-8 grid lg:grid-cols-[1fr_320px] gap-6">
+      <div className="max-w-[1100px] mx-auto px-4 sm:px-6 py-8 grid lg:grid-cols-[1fr_320px] gap-6">
         <div className="bg-card border border-border rounded-2xl p-6 md:p-8">
           <div className="flex items-center gap-2 mb-8">
             {[{ n: 1, label: "Doctor" }, { n: 2, label: "Clinic" }, { n: 3, label: "Review" }].map((s, i) => (

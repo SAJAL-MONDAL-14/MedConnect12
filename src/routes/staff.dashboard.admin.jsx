@@ -250,10 +250,10 @@ export default function HospitalAdminDashboard() {
       </aside>
 
       <div className="flex-1 min-w-0">
-        <header className="bg-card border-b border-border h-16 flex items-center justify-between px-6 sticky top-0 z-30">
-          <div>
-            <div className="font-semibold">{view==="Dashboard"?"Good morning, Admin 👋":view}</div>
-            <div className="text-xs text-muted-foreground">North Bengal Medical College · Full access</div>
+        <header className="bg-card border-b border-border h-16 flex items-center justify-between gap-3 px-4 sm:px-6 sticky top-0 z-30">
+          <div className="min-w-0">
+            <div className="font-semibold truncate">{view==="Dashboard"?"Good morning, Admin 👋":view}</div>
+            <div className="text-xs text-muted-foreground truncate">North Bengal Medical College · Full access</div>
           </div>
           <div className="flex items-center gap-3">
             <span className="hidden sm:inline-flex items-center gap-1.5 text-xs text-success"><span className="live-dot"/>Live connected</span>
@@ -269,7 +269,7 @@ export default function HospitalAdminDashboard() {
           </div>
         </header>
 
-        <div className="md:hidden flex overflow-x-auto bg-card border-b border-border px-3">
+        <div className="md:hidden flex overflow-x-auto bg-card border-b border-border px-2 snap-x">
           {navItems.map(n=>(
             <button key={n.label} onClick={()=>setView(n.label)}
               className={`shrink-0 px-3 py-2.5 text-xs font-medium border-b-2 relative ${view===n.label?"border-primary text-primary":"border-transparent text-muted-foreground"}`}>
@@ -279,7 +279,7 @@ export default function HospitalAdminDashboard() {
           ))}
         </div>
 
-        <main className="p-6 space-y-6">
+        <main className="p-4 sm:p-6 space-y-5 sm:space-y-6">
           {view==="Dashboard"    && <DashboardView setView={setView} doctors={doctors} staff={staff} sections={sections} general={general} icu={icu} sosEvents={sosEvents} weeklyBookings={weeklyBookings} maxV={maxV} pendingReview={pendingReview}/>}
           {view==="Availability" && <AvailabilityView general={general} setGen={setGen} icu={icu} setIcu={setIcu} ot={ot} setOt={setOt} amb={amb} setAmb={setAmb} saved={saved} save={save}/>}
           {view==="Appointments" && <AppointmentsView/>}
@@ -750,7 +750,7 @@ function OnboardingView({ doctors, setDoctors }) {
         </div>
 
         {filtered.length===0 ? (
-          <div className="px-6 py-16 text-center">
+          <div className="px-4 sm:px-6 py-10 sm:py-16 text-center">
             <CheckCircle2 className="h-10 w-10 mx-auto text-muted-foreground opacity-30 mb-3"/>
             <p className="text-sm text-muted-foreground">No applications in this category.</p>
           </div>

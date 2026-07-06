@@ -1181,11 +1181,9 @@
 // }
 
 
-
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { LayoutDashboard, BarChart3, Building2, FlaskConical, Stethoscope, Users, UserCog, Siren, CalendarCheck, Settings, CreditCard, Search, Bell, ShieldCheck, ChevronRight, LogOut, Plus, X, ClipboardList, Mail, Phone, MapPin, Award, Check } from "lucide-react";
- import AdminHospitals from "./admin.hospitals";
 
 const sections = [
   { label: "Overview", items: [{ icon: LayoutDashboard, label: "Dashboard" }, { icon: BarChart3, label: "Analytics" }] },
@@ -1241,10 +1239,10 @@ export default function AdminDashboard() {
       </aside>
 
       <div className="flex-1 min-w-0">
-        <header className="bg-card border-b border-border h-16 flex items-center justify-between px-6 sticky top-0 z-30">
-          <div>
-            <div className="font-semibold">{view}</div>
-            <div className="text-xs text-muted-foreground">All tenants · India</div>
+        <header className="bg-card border-b border-border h-16 flex items-center justify-between gap-3 px-4 sm:px-6 sticky top-0 z-30">
+          <div className="min-w-0">
+            <div className="font-semibold truncate">{view}</div>
+            <div className="text-xs text-muted-foreground truncate">All tenants · India</div>
           </div>
           <div className="flex items-center gap-3">
             <div className="hidden sm:flex items-center gap-2 rounded-md border border-border bg-input px-3 w-64">
@@ -1259,7 +1257,7 @@ export default function AdminDashboard() {
           </div>
         </header>
 
-        <div className="md:hidden flex overflow-x-auto bg-card border-b border-border px-2">
+        <div className="md:hidden flex overflow-x-auto bg-card border-b border-border px-2 snap-x">
           {sections.flatMap((s) => s.items).map((n) => (
             <button
               key={n.label}
@@ -1273,10 +1271,10 @@ export default function AdminDashboard() {
           ))}
         </div>
 
-        <main className="p-6 space-y-6">
+        <main className="p-4 sm:p-6 space-y-5 sm:space-y-6">
           {view === "Dashboard" && <DashboardView />}
           {view === "Analytics" && <AnalyticsView />}
-          {view === "Hospitals" && <AdminHospitals />}
+          {view === "Hospitals" && <HospitalsView />}
           {view === "Labs" && <PlaceholderView title="Labs" desc="Manage lab tenants and home-collection availability." />}
           {view === "Doctors" && <PlaceholderView title="Doctors" desc="All registered doctors across the platform." />}
           {view === "Clinic Applications" && <ClinicApplicationsView />}
@@ -1305,12 +1303,12 @@ function DashboardView() {
   return (
     <>
       {/* Hero card */}
-      <div className="rounded-2xl p-6 text-white relative overflow-hidden bg-gradient-to-r from-primary via-primary-dark to-foreground">
+      <div className="rounded-2xl p-5 sm:p-6 text-white relative overflow-hidden bg-gradient-to-r from-primary via-primary-dark to-foreground">
         <div className="absolute right-0 top-0 h-full w-1/3 opacity-10" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
         <div className="relative flex items-start justify-between flex-wrap gap-4">
           <div>
             <div className="text-xs uppercase tracking-wider text-white/70 font-bold">Platform overview</div>
-            <h2 className="mt-1 text-2xl font-bold">Everything looks healthy 🟢</h2>
+            <h2 className="mt-1 text-2xl font-bold leading-tight">Everything looks healthy</h2>
             <p className="text-sm text-white/80 mt-1">48 hospitals, 1,284 bookings today, 7 SOS events resolved.</p>
           </div>
           <div className="flex items-center gap-3">
@@ -1326,9 +1324,9 @@ function DashboardView() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((s) => (
-          <div key={s.label} className="rounded-xl bg-card border border-border p-5 shadow-card hover:shadow-lg hover:-translate-y-0.5 transition">
+          <div key={s.label} className="rounded-xl bg-card border border-border p-4 sm:p-5 shadow-card hover:shadow-lg hover:-translate-y-0.5 transition">
             <div className="flex items-center justify-between">
               <div className={`h-10 w-10 rounded-lg flex items-center justify-center bg-${s.tone}-soft text-${s.tone}`}>
                 <s.icon className="h-5 w-5" />
@@ -1342,7 +1340,7 @@ function DashboardView() {
         ))}
       </div>
 
-      <div className="grid lg:grid-cols-[1.4fr_1fr] gap-4">
+      <div className="grid lg:grid-cols-[minmax(0,1.4fr)_1fr] gap-4">
         <BookingsChart />
         <SOSEventsCard />
       </div>
@@ -1698,7 +1696,7 @@ function ClinicApplicationsView() {
         </div>
 
         {filtered.length === 0 ? (
-          <div className="px-6 py-16 text-center">
+          <div className="px-4 sm:px-6 py-10 sm:py-16 text-center">
             <ClipboardList className="h-10 w-10 mx-auto text-muted-foreground opacity-50 mb-3" />
             <p className="text-sm text-muted-foreground">No {filter !== "all" ? filter : ""} applications yet.</p>
             <p className="text-xs text-muted-foreground mt-1">Submitted clinics will appear here for review.</p>

@@ -115,10 +115,10 @@ export default function BillingDashboard() {
 
       <div className="flex-1 min-w-0">
         {/* Header */}
-        <header className="bg-card border-b border-border h-16 flex items-center justify-between px-6 sticky top-0 z-30">
-          <div>
-            <div className="font-semibold">{view === "Dashboard" ? "Good morning, Sunita 👋" : view}</div>
-            <div className="text-xs text-muted-foreground">Billing Staff · North Bengal Medical College</div>
+        <header className="bg-card border-b border-border h-16 flex items-center justify-between gap-3 px-4 sm:px-6 sticky top-0 z-30">
+          <div className="min-w-0">
+            <div className="font-semibold truncate">{view === "Dashboard" ? "Good morning, Sunita 👋" : view}</div>
+            <div className="text-xs text-muted-foreground truncate">Billing Staff · North Bengal Medical College</div>
           </div>
           <div className="flex items-center gap-3">
             {pending.length > 0 && (
@@ -134,7 +134,7 @@ export default function BillingDashboard() {
         </header>
 
         {/* Mobile tabs */}
-        <div className="md:hidden flex overflow-x-auto bg-card border-b border-border px-3">
+        <div className="md:hidden flex overflow-x-auto bg-card border-b border-border px-2 snap-x">
           {navItems.map((n) => (
             <button key={n.label} onClick={() => setView(n.label)}
               className={`shrink-0 px-3 py-2.5 text-xs font-medium border-b-2
@@ -144,13 +144,13 @@ export default function BillingDashboard() {
           ))}
         </div>
 
-        <main className="p-6 space-y-6">
+        <main className="p-4 sm:p-6 space-y-5 sm:space-y-6">
 
           {/* ── DASHBOARD ── */}
           {view === "Dashboard" && (
             <>
               {/* Hero */}
-              <div className="rounded-2xl p-6 text-white relative overflow-hidden" style={{ background: "linear-gradient(135deg, #7A0F0F 0%, #E24B4A 100%)" }}>
+              <div className="rounded-2xl p-5 sm:p-6 text-white relative overflow-hidden" style={{ background: "linear-gradient(135deg, #7A0F0F 0%, #E24B4A 100%)" }}>
                 <div className="absolute right-0 top-0 h-full w-1/3 opacity-10" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
                 <div className="relative flex items-start justify-between flex-wrap gap-4">
                   <div>
@@ -172,7 +172,7 @@ export default function BillingDashboard() {
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                 {[
                   { label: "Total collected",   value: `₹${totalCollected.toLocaleString()}`, tone: "success",   icon: Wallet },
                   { label: "Total pending",     value: `₹${totalPending.toLocaleString()}`,   tone: "warning",   icon: Clock },
@@ -192,7 +192,7 @@ export default function BillingDashboard() {
               {/* Pending payments urgent list */}
               {pending.length > 0 && (
                 <div className="rounded-xl bg-warning-soft border border-warning/20 p-5">
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
                     <h2 className="font-semibold text-warning inline-flex items-center gap-2">
                       <AlertCircle className="h-4 w-4" /> Pending payments
                     </h2>
@@ -200,8 +200,8 @@ export default function BillingDashboard() {
                   </div>
                   <div className="space-y-2">
                     {pending.map((p) => (
-                      <div key={p.id} className="flex items-center justify-between bg-card rounded-lg px-4 py-3 border border-warning/20">
-                        <div>
+                      <div key={p.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-card rounded-lg px-4 py-3 border border-warning/20">
+                        <div className="min-w-0">
                           <div className="font-medium text-sm">{p.patient}</div>
                           <div className="text-xs text-muted-foreground">{p.doctor} · {p.time} · {p.type}</div>
                         </div>

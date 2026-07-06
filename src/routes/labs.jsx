@@ -66,12 +66,12 @@ export default function LabsPage() {
             backgroundSize: "28px 28px",
           }}
         />
-        <div className="relative max-w-[1200px] mx-auto px-6 py-12">
+        <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 py-12">
           <div className="flex items-center gap-2 text-xs uppercase tracking-wider opacity-80 mb-3">
             <Beaker className="h-4 w-4" /> {lab.certified}
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{lab.name}</h1>
-          <p className="mt-2 text-sm opacity-90 flex items-center gap-2">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">{lab.name}</h1>
+          <p className="mt-2 text-sm opacity-90 flex items-start sm:items-center gap-2">
             <MapPin className="h-4 w-4" /> {lab.address} ·{" "}
             <Star className="h-3.5 w-3.5 fill-current" /> {lab.rating} · Home collection available
           </p>
@@ -88,7 +88,7 @@ export default function LabsPage() {
         </div>
       </section>
 
-      <div className="max-w-[1200px] mx-auto px-6 py-8 grid lg:grid-cols-[260px_1fr] gap-6">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8 grid lg:grid-cols-[260px_1fr] gap-6">
         <aside className="space-y-4">
           <div className="rounded-xl bg-card border border-border p-4">
             <h3 className="text-xs uppercase tracking-wider text-muted-foreground mb-3">
@@ -167,7 +167,7 @@ export default function LabsPage() {
                   key={t.id}
                   className="rounded-xl bg-card border border-border p-4 hover:border-primary/40 transition"
                 >
-                  <div className="flex items-start justify-between gap-4">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 min-w-0">
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-foreground">{t.name}</h3>
                       <p className="text-xs text-muted-foreground mt-1">
@@ -186,7 +186,7 @@ export default function LabsPage() {
                         )}
                       </div>
                     </div>
-                    <div className="text-right shrink-0">
+                    <div className="flex items-center justify-between sm:block sm:text-right shrink-0 gap-3">
                       <div className="font-mono text-lg font-semibold text-success">₹{t.price}</div>
                       {qty === 0 ? (
                         <button
@@ -223,9 +223,9 @@ export default function LabsPage() {
 
       {cartItems.length > 0 && !booked && (
         <div className="fixed bottom-0 inset-x-0 z-30 bg-card border-t border-border shadow-elevated">
-          <div className="max-w-[1200px] mx-auto px-6 py-4">
-            <div className="flex flex-wrap items-center gap-4 justify-between">
-              <div className="flex items-center gap-3">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-4">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4 sm:justify-between">
+              <div className="flex items-center gap-3 min-w-0">
                 <div className="h-10 w-10 rounded-full bg-success-soft text-success flex items-center justify-center">
                   <ShoppingCart className="h-5 w-5" />
                 </div>
@@ -238,21 +238,21 @@ export default function LabsPage() {
                   </div>
                 </div>
               </div>
-              <div className="inline-flex rounded-lg bg-secondary p-1 text-xs">
+              <div className="grid grid-cols-2 w-full sm:w-auto rounded-lg bg-secondary p-1 text-xs">
                 <button
                   onClick={() => setMode("home")}
-                  className={`px-3 py-1.5 rounded-md font-medium transition ${mode === "home" ? "bg-card shadow-sm text-foreground" : "text-muted-foreground"}`}
+                  className={`px-2 sm:px-3 py-1.5 rounded-md font-medium transition ${mode === "home" ? "bg-card shadow-sm text-foreground" : "text-muted-foreground"}`}
                 >
                   <Home className="h-3.5 w-3.5 inline mr-1" /> Home collection
                 </button>
                 <button
                   onClick={() => setMode("walkin")}
-                  className={`px-3 py-1.5 rounded-md font-medium transition ${mode === "walkin" ? "bg-card shadow-sm text-foreground" : "text-muted-foreground"}`}
+                  className={`px-2 sm:px-3 py-1.5 rounded-md font-medium transition ${mode === "walkin" ? "bg-card shadow-sm text-foreground" : "text-muted-foreground"}`}
                 >
                   <Building2 className="h-3.5 w-3.5 inline mr-1" /> Walk-in
                 </button>
               </div>
-              <div className="text-right">
+              <div className="w-full sm:w-auto flex sm:block items-center justify-between sm:text-right">
                 <div className="text-xs text-muted-foreground">
                   {discount > 0 && <span className="text-success mr-1">−₹{discount}</span>}Total
                 </div>
@@ -260,7 +260,7 @@ export default function LabsPage() {
               </div>
               <button
                 onClick={() => setBooked(true)}
-                className="inline-flex items-center gap-2 rounded-lg bg-success text-success-foreground px-5 py-3 text-sm font-semibold hover:bg-success-dark transition"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-success text-success-foreground px-5 py-3 text-sm font-semibold hover:bg-success-dark transition"
               >
                 {mode === "home" ? "Schedule pickup" : "Book slot"}
                 <Clock className="h-4 w-4" />

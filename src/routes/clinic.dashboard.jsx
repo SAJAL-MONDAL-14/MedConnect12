@@ -44,22 +44,22 @@ export default function ClinicDashboard() {
       </aside>
 
       <div className="flex-1 min-w-0">
-        <header className="bg-card border-b border-border h-16 flex items-center justify-between px-6 sticky top-0 z-30">
-          <div>
-            <div className="font-semibold">{view === "Dashboard" ? "Welcome back, Dr. Kapoor 👨‍⚕️" : view}</div>
-            <div className="text-xs text-muted-foreground">SkinCare Clinic · Siliguri</div>
+        <header className="bg-card border-b border-border h-16 flex items-center justify-between gap-3 px-4 sm:px-6 sticky top-0 z-30">
+          <div className="min-w-0">
+            <div className="font-semibold truncate">{view === "Dashboard" ? "Welcome back, Dr. Kapoor 👨‍⚕️" : view}</div>
+            <div className="text-xs text-muted-foreground truncate">SkinCare Clinic · Siliguri</div>
           </div>
           <div className="flex items-center gap-3">
             <span className="hidden sm:inline-flex items-center gap-1.5 text-xs text-success"><span className="live-dot" /> Online</span>
             <button className="relative p-2 rounded-md hover:bg-muted"><Bell className="h-4 w-4" /><span className="absolute top-1 right-1 h-1.5 w-1.5 rounded-full bg-emergency" /></button>
           </div>
         </header>
-        <div className="md:hidden flex overflow-x-auto bg-card border-b border-border px-3">
+        <div className="md:hidden flex overflow-x-auto bg-card border-b border-border px-2 snap-x">
           {navItems.map((n) => (
             <button key={n.label} onClick={() => setView(n.label)} className={`shrink-0 px-3 py-2.5 text-xs font-medium border-b-2 ${view === n.label ? "border-primary text-primary" : "border-transparent text-muted-foreground"}`}>{n.label}</button>
           ))}
         </div>
-        <main className="p-6 space-y-6">
+        <main className="p-4 sm:p-6 space-y-5 sm:space-y-6">
           {view === "Dashboard" && <DashboardView />}
           {view === "Appointments" && <AppointmentsView />}
           {view === "Patients" && <PatientsView />}

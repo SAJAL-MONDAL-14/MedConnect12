@@ -48,11 +48,11 @@ export default function SearchPage() {
     <div className="min-h-screen bg-background">
       <Navbar active="hospitals" />
       <section className="bg-card border-b border-border sticky top-16 z-30">
-        <div className="max-w-[1400px] mx-auto px-6 py-3 space-y-3">
-          <div className="flex items-center gap-3">
-            <div className="flex-1 max-w-2xl flex items-center gap-2 bg-input rounded-md border border-border px-3 py-2 focus-within:border-primary transition">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-3 space-y-3">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className="min-w-0 flex-1 max-w-2xl flex items-center gap-2 bg-input rounded-md border border-border px-3 py-2 focus-within:border-primary transition">
               <Search className="h-4 w-4 text-muted-foreground" />
-              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search hospitals, doctors, specialty..." className="flex-1 bg-transparent text-sm outline-none" />
+              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search hospitals, doctors..." className="min-w-0 flex-1 bg-transparent text-sm outline-none" />
               {query && <button onClick={() => setQuery("")} className="text-text-muted hover:text-foreground"><X className="h-4 w-4" /></button>}
             </div>
             <button onClick={() => setShowFilters((s) => !s)} className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-2 text-sm font-medium transition ${showFilters ? "bg-primary text-primary-foreground border-primary" : "border-border bg-card hover:border-primary"}`}>
@@ -71,12 +71,12 @@ export default function SearchPage() {
           )}
         </div>
       </section>
-      <div className="max-w-[1400px] mx-auto px-6 py-6 grid lg:grid-cols-[1fr_500px] gap-6">
-        <div>
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-5 sm:py-6 grid lg:grid-cols-[minmax(0,1fr)_500px] gap-6 min-w-0">
+        <div className="min-w-0">
           {showFilters && <FilterPanel chips={chips} setChips={setChips} />}
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
             <p className="text-sm text-muted-foreground"><span className="font-semibold text-foreground">{results.length} results</span>{query ? <> for "<span className="text-foreground">{query}</span>"</> : " near Siliguri, WB"}</p>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
               <div className="relative">
                 <button onClick={() => setSortOpen((o) => !o)} className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
                   Sort: <span className="text-foreground font-medium">{sort}</span> <ChevronDown className="h-3.5 w-3.5" />
@@ -110,7 +110,7 @@ export default function SearchPage() {
               ))}
               {results[0] && (
                 <div className="rounded-lg bg-card border border-border p-5 hover:shadow-lift transition">
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                     <div className="h-14 w-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">{doctors[0].initials}</div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
@@ -123,9 +123,9 @@ export default function SearchPage() {
                         <span className="text-xs text-success inline-flex items-center gap-1"><Clock className="h-3 w-3" /> {doctors[0].nextSlot}</span>
                       </div>
                     </div>
-                    <div className="text-right">
+                    <div className="w-full sm:w-auto sm:text-right flex sm:block items-center justify-between">
                       <div className="font-mono text-lg font-semibold">₹{doctors[0].fee}</div>
-                      <Link to="/booking" className="mt-2 inline-block rounded-md bg-primary text-primary-foreground px-3 py-1.5 text-xs font-semibold hover:bg-primary-dark">Book</Link>
+                      <Link to="/booking" className="sm:mt-2 inline-block rounded-md bg-primary text-primary-foreground px-3 py-1.5 text-xs font-semibold hover:bg-primary-dark">Book</Link>
                     </div>
                   </div>
                 </div>

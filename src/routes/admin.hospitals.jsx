@@ -29,7 +29,7 @@ export default function AdminHospitals() {
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card">
-        <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link to="/admin/dashboard" className="text-muted-foreground hover:text-foreground"><ChevronLeft className="h-4 w-4" /></Link>
             <span className="text-sm font-bold">Hospital Applications</span>
@@ -38,7 +38,7 @@ export default function AdminHospitals() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-6 py-6">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
         {/* Filters */}
         <div className="mb-4 flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-2 flex-1 min-w-[200px] rounded-md border border-border bg-card px-3">
@@ -50,38 +50,74 @@ export default function AdminHospitals() {
           </select>
         </div>
 
-        {/* Table */}
-        <div className="rounded-lg border border-border bg-card overflow-hidden">
-          {filtered.length === 0 ? (
-            <div className="p-12 text-center text-sm text-muted-foreground">
-              <Building2 className="h-8 w-8 mx-auto mb-2 opacity-40" />
-              No applications match.
+        {/* Empty state */}
+        {filtered.length === 0 ? (
+          <div className="rounded-lg border border-border bg-card p-12 text-center text-sm text-muted-foreground">
+            <Building2 className="h-8 w-8 mx-auto mb-2 opacity-40" />
+            No applications match.
+          </div>
+        ) : (
+          <>
+            {/* Mobile: cards */}
+            <ul className="sm:hidden space-y-2" role="list" aria-label="Hospital applications">
+              {filtered.map((a) => {
+                const meta = STATUS_META[a.status] || { label: a.status, tone: "muted" };
+                const loc = [a.profile.city, a.profile.state].filter(Boolean).join(", ") || "Unknown location";
+                const name = a.profile.hospitalName || "Unnamed hospital";
+                const date = new Date(a.updatedAt).toLocaleDateString();
+                return (
+                  <li key={a.id}>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedId(a.id)}
+                      aria-label={`Review application from ${name} in ${loc}, status ${meta.label}, updated ${date}`}
+                      className="w-full min-h-11 text-left rounded-lg border border-border bg-card p-3 active:bg-secondary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="min-w-0 flex-1">
+                          <div className="font-semibold text-sm truncate">{name}</div>
+                          <div className="text-[10px] text-muted-foreground font-mono">{a.id}</div>
+                        </div>
+                        <StatusBadge meta={meta} />
+                      </div>
+                      <div className="mt-2 flex items-center justify-between gap-2 text-xs text-muted-foreground">
+                        <span className="truncate">{loc}</span>
+                        <span className="shrink-0">{date}</span>
+                      </div>
+                      <div className="mt-2 text-xs font-semibold text-primary" aria-hidden="true">Review →</div>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+
+            {/* ≥sm: table */}
+            <div className="hidden sm:block rounded-lg border border-border bg-card overflow-x-auto">
+              <table className="w-full min-w-[680px] text-sm">
+                <thead className="bg-secondary text-xs uppercase tracking-wide text-muted-foreground">
+                  <tr><th className="text-left px-4 py-2">Hospital</th><th className="text-left px-4 py-2">Location</th><th className="text-left px-4 py-2">Submitted</th><th className="text-left px-4 py-2">Status</th><th /></tr>
+                </thead>
+                <tbody>
+                  {filtered.map((a) => {
+                    const meta = STATUS_META[a.status] || { label: a.status, tone: "muted" };
+                    return (
+                      <tr key={a.id} className="border-t border-border hover:bg-secondary/40 cursor-pointer" onClick={() => setSelectedId(a.id)}>
+                        <td className="px-4 py-3">
+                          <div className="font-semibold">{a.profile.hospitalName || "—"}</div>
+                          <div className="text-xs text-muted-foreground font-mono">{a.id}</div>
+                        </td>
+                        <td className="px-4 py-3 text-muted-foreground">{[a.profile.city, a.profile.state].filter(Boolean).join(", ") || "—"}</td>
+                        <td className="px-4 py-3 text-muted-foreground text-xs">{new Date(a.updatedAt).toLocaleString()}</td>
+                        <td className="px-4 py-3"><StatusBadge meta={meta} /></td>
+                        <td className="px-4 py-3 text-right text-xs text-primary">Review →</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
-          ) : (
-            <table className="w-full text-sm">
-              <thead className="bg-secondary text-xs uppercase tracking-wide text-muted-foreground">
-                <tr><th className="text-left px-4 py-2">Hospital</th><th className="text-left px-4 py-2">Location</th><th className="text-left px-4 py-2">Submitted</th><th className="text-left px-4 py-2">Status</th><th /></tr>
-              </thead>
-              <tbody>
-                {filtered.map((a) => {
-                  const meta = STATUS_META[a.status] || { label: a.status, tone: "muted" };
-                  return (
-                    <tr key={a.id} className="border-t border-border hover:bg-secondary/40 cursor-pointer" onClick={() => setSelectedId(a.id)}>
-                      <td className="px-4 py-3">
-                        <div className="font-semibold">{a.profile.hospitalName || "—"}</div>
-                        <div className="text-xs text-muted-foreground font-mono">{a.id}</div>
-                      </td>
-                      <td className="px-4 py-3 text-muted-foreground">{[a.profile.city, a.profile.state].filter(Boolean).join(", ") || "—"}</td>
-                      <td className="px-4 py-3 text-muted-foreground text-xs">{new Date(a.updatedAt).toLocaleString()}</td>
-                      <td className="px-4 py-3"><StatusBadge meta={meta} /></td>
-                      <td className="px-4 py-3 text-right text-xs text-primary">Review →</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          )}
-        </div>
+          </>
+        )}
       </main>
 
       {selectedId && <DetailDrawer id={selectedId} onClose={() => { setSelectedId(null); refresh(); }} />}
@@ -223,7 +259,7 @@ function OverviewTab({ app }) {
   const p = app.profile;
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <KV k="Type" v={p.hospitalType} />
         <KV k="Reg #" v={p.regNumber} />
         <KV k="Clinical Reg #" v={p.clinicalRegNumber} />
@@ -234,7 +270,7 @@ function OverviewTab({ app }) {
         <KV k="PIN" v={p.pincode} />
       </div>
       <div><div className="text-xs font-semibold text-muted-foreground mb-1">Address</div><div className="rounded-md border border-border bg-card px-3 py-2 text-sm">{p.address}, {p.city}, {p.district}, {p.state}</div></div>
-      <div><div className="text-xs font-semibold text-muted-foreground mb-1">Administrator</div><div className="grid grid-cols-3 gap-2"><KV k="Name" v={p.adminName} /><KV k="Email" v={p.adminEmail} /><KV k="Phone" v={p.adminPhone} /></div></div>
+      <div><div className="text-xs font-semibold text-muted-foreground mb-1">Administrator</div><div className="grid grid-cols-1 sm:grid-cols-3 gap-2"><KV k="Name" v={p.adminName} /><KV k="Email" v={p.adminEmail} /><KV k="Phone" v={p.adminPhone} /></div></div>
       {app.rejectionReason && <div className="rounded-md border border-emergency/30 bg-emergency-soft p-3 text-xs text-emergency"><strong>Rejection reason:</strong> {app.rejectionReason}</div>}
       {app.requestNotes    && <div className="rounded-md border border-warning/30 bg-warning-soft p-3 text-xs text-warning"><strong>Notes to hospital:</strong> {app.requestNotes}</div>}
     </div>
@@ -247,9 +283,9 @@ function FacilityTab({ app }) {
   const bools = [["emergency24x7","24x7 Emergency"],["pharmacy","Pharmacy"],["laboratory","Lab"],["bloodBank","Blood bank"],["icu","ICU"],["nicu","NICU"],["dialysis","Dialysis"],["mri","MRI"],["ctScan","CT scan"]];
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-3 gap-2">{num.map(([k,l]) => <KV key={k} k={l} v={f[k] ?? "—"} />)}</div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">{num.map(([k,l]) => <KV key={k} k={l} v={f[k] ?? "—"} />)}</div>
       <div><div className="text-xs font-semibold text-muted-foreground mb-1">Departments</div><div className="rounded-md border border-border bg-card px-3 py-2 text-sm">{f.departments || "—"}</div></div>
-      <div className="grid grid-cols-3 gap-2">{bools.map(([k,l]) => (
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">{bools.map(([k,l]) => (
         <div key={k} className={`rounded-md border px-3 py-2 text-xs flex items-center justify-between ${f[k] ? "border-success/40 bg-success-soft text-success" : "border-border bg-card text-muted-foreground"}`}>
           <span>{l}</span>{f[k] ? <CheckCircle2 className="h-3.5 w-3.5" /> : <XCircle className="h-3.5 w-3.5" />}
         </div>

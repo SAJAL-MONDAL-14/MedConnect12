@@ -106,15 +106,24 @@ export default function HospitalRegister() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border bg-card">
-        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <Link to="/" className="text-sm font-bold tracking-tight">MedConnect</Link>
           <div className="text-xs text-muted-foreground">Application ID: <span className="font-mono">{app.id}</span></div>
         </div>
       </header>
 
       {/* Stepper */}
-      <div className="max-w-5xl mx-auto px-6 pt-8">
-        <div className="flex items-center gap-2 overflow-x-auto pb-2">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-8">
+        <div className="sm:hidden rounded-xl border border-border bg-card p-3 shadow-card">
+          <div className="flex items-center justify-between gap-3 text-sm">
+            <span className="font-semibold">Step {step + 1} of {STEPS.length}</span>
+            <span className="text-primary font-medium">{STEPS[step].label}</span>
+          </div>
+          <div className="mt-3 h-2 rounded-full bg-muted overflow-hidden">
+            <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${((step + 1) / STEPS.length) * 100}%` }} />
+          </div>
+        </div>
+        <div className="hidden sm:flex items-center gap-2 overflow-x-auto pb-2">
           {STEPS.map((s, i) => {
             const active = i === step, done = i < step;
             return (
@@ -135,7 +144,7 @@ export default function HospitalRegister() {
       </div>
 
       {/* Body */}
-      <main className="max-w-5xl mx-auto px-6 py-8">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
         <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
           {STEPS[step].id === "profile"   && <ProfileStep   app={app} updateField={updateField} />}
           {STEPS[step].id === "facility"  && <FacilityStep  app={app} updateField={updateField} />}

@@ -30,11 +30,11 @@ const stats = [
 
 // ─── Service cards ────────────────────────────────────────────────────────────
 const services = [
-  { icon: "🏥", label: "Hospitals",   desc: "Live bed count",  to: "/search",  color: "from-blue-500 to-blue-600"   },
-  { icon: "👨‍⚕️", label: "Doctors",    desc: "Book instantly",  to: "/doctors", color: "from-emerald-500 to-emerald-600" },
-  { icon: "🧪", label: "Labs",        desc: "Home collection", to: "/labs",    color: "from-purple-500 to-purple-600" },
-  { icon: "💊", label: "Clinics",     desc: "Nearby clinics",  to: "/clinics", color: "from-orange-500 to-orange-600" },
-  { icon: "🚨", label: "Emergency",   desc: "One tap SOS",     to: "/sos",     color: "from-red-500 to-red-600"     },
+  { icon: Building2, label: "Hospitals", desc: "Live beds", to: "/search" },
+  { icon: Stethoscope, label: "Doctors", desc: "Book now", to: "/doctors" },
+  { icon: FlaskConical, label: "Labs", desc: "Home tests", to: "/labs" },
+  { icon: Activity, label: "Clinics", desc: "Near you", to: "/clinics" },
+  { icon: Siren, label: "Emergency", desc: "SOS", to: "/sos" },
 ];
 
 // ─── How it works ─────────────────────────────────────────────────────────────
@@ -75,7 +75,6 @@ export default function Home() {
         className="relative overflow-hidden"
         style={{
           background: "linear-gradient(135deg, oklch(0.12 0.04 250) 0%, oklch(0.18 0.08 250) 40%, oklch(0.22 0.10 260) 100%)",
-          minHeight: "92vh",
         }}
       >
         {/* Animated grid */}
@@ -91,10 +90,10 @@ export default function Home() {
         <div className="absolute bottom-[-20%] left-[-10%] h-[500px] w-[500px] rounded-full opacity-15"
           style={{ background: "radial-gradient(circle, oklch(0.55 0.18 162), transparent 70%)", filter: "blur(80px)" }} />
 
-        <div className="relative max-w-[1200px] mx-auto px-6 pt-24 pb-20">
-          <div className="grid lg:grid-cols-[1fr_420px] gap-16 items-center">
+        <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 pt-10 sm:pt-20 lg:pt-24 pb-16 sm:pb-20">
+          <div className="grid lg:grid-cols-[minmax(0,1fr)_420px] gap-10 lg:gap-16 items-center min-w-0">
             {/* Left */}
-            <div style={{ opacity: heroVisible ? 1 : 0, transform: heroVisible ? "translateY(0)" : "translateY(32px)", transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)" }}>
+            <div className="min-w-0" style={{ opacity: heroVisible ? 1 : 0, transform: heroVisible ? "translateY(0)" : "translateY(32px)", transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)" }}>
               {/* Live badge */}
               <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6 text-xs font-semibold"
                 style={{ background: "oklch(1 0 0 / 0.08)", border: "1px solid oklch(1 0 0 / 0.15)", color: "oklch(0.75 0.12 162)" }}>
@@ -104,7 +103,7 @@ export default function Home() {
 
               {/* Headline */}
               <h1 className="font-bold tracking-tight text-white leading-[1.05]"
-                style={{ fontSize: "clamp(2.4rem, 5vw, 3.8rem)" }}>
+                style={{ fontSize: "clamp(2.2rem, 10vw, 3.8rem)" }}>
                 Find hospitals
                 <br />
                 <span style={{ color: "oklch(0.75 0.18 250)" }}>book instantly.</span>
@@ -119,16 +118,18 @@ export default function Home() {
               </p>
 
               {/* Search bar */}
-              <form onSubmit={submit} className="mt-8 flex items-center gap-2 p-2 rounded-2xl max-w-[580px]"
+              <form onSubmit={submit} className="mt-8 flex flex-col sm:flex-row sm:items-center gap-2 p-2 rounded-2xl max-w-[580px]"
                 style={{ background: "oklch(1 0 0 / 0.08)", border: "1px solid oklch(1 0 0 / 0.15)", backdropFilter: "blur(12px)" }}>
-                <MapPin className="h-5 w-5 ml-2 shrink-0" style={{ color: "oklch(0.65 0.18 250)" }} />
-                <input
-                  value={q} onChange={e => setQ(e.target.value)}
-                  placeholder="Search hospitals, doctors, specialties..."
-                  className="flex-1 bg-transparent text-sm py-2.5 outline-none text-white placeholder:text-white/40 font-medium"
-                />
+                <div className="flex items-center gap-2 w-full min-w-0 px-2 sm:px-0">
+                  <MapPin className="h-5 w-5 shrink-0" style={{ color: "oklch(0.65 0.18 250)" }} />
+                  <input
+                    value={q} onChange={e => setQ(e.target.value)}
+                    placeholder="Search hospitals, doctors..."
+                    className="min-w-0 flex-1 bg-transparent text-sm py-2.5 outline-none text-white placeholder:text-white/40 font-medium"
+                  />
+                </div>
                 <button type="submit"
-                  className="rounded-xl px-5 py-2.5 text-sm font-bold transition-all hover:opacity-90 active:scale-95"
+                  className="w-full sm:w-auto rounded-xl px-5 py-2.5 text-sm font-bold transition-all hover:opacity-90 active:scale-95"
                   style={{ background: "oklch(0.55 0.18 250)", color: "white" }}>
                   <Search className="h-4 w-4 inline mr-1.5" />Search
                 </button>
@@ -153,16 +154,16 @@ export default function Home() {
               </div>
 
               {/* Quick service icons */}
-              <div className="mt-10 flex items-center gap-1 flex-wrap">
+              <div className="mt-8 grid grid-cols-3 sm:flex sm:items-center gap-2 max-w-md sm:max-w-none">
                 {services.map((s, i) => (
                   <Link key={s.label} to={s.to}
-                    className="flex flex-col items-center gap-1.5 rounded-2xl px-4 py-3 transition-all hover:scale-105 group"
+                    className="flex flex-col items-center gap-1.5 rounded-2xl px-3 py-3 transition-all hover:scale-105 group min-w-0"
                     style={{
                       background: "oklch(1 0 0 / 0.06)",
                       border: "1px solid oklch(1 0 0 / 0.10)",
                       animationDelay: `${i * 80}ms`,
                     }}>
-                    <span className="text-2xl">{s.icon}</span>
+                    <s.icon className="h-5 w-5 text-white/80" />
                     <span className="text-[10px] font-bold text-white/80 group-hover:text-white transition">{s.label}</span>
                     <span className="text-[9px] text-white/40">{s.desc}</span>
                   </Link>
@@ -265,10 +266,10 @@ export default function Home() {
 
       {/* ── STATS BAR ────────────────────────────────────────────────────────── */}
       <section className="bg-background border-b border-border">
-        <div className="max-w-[1200px] mx-auto px-6 py-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-border">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-0 md:divide-x divide-border">
             {stats.map((s, i) => (
-              <div key={s.label} className="flex items-center gap-3 px-6 py-2 first:pl-0 last:pr-0">
+              <div key={s.label} className="flex items-center gap-3 rounded-xl bg-card md:bg-transparent border border-border md:border-0 p-3 sm:px-6 sm:py-2 md:first:pl-0 md:last:pr-0">
                 <div className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0 bg-primary-soft">
                   <s.icon className="h-5 w-5 text-primary" />
                 </div>
@@ -283,13 +284,13 @@ export default function Home() {
       </section>
 
       {/* ── HOSPITALS NEAR YOU ───────────────────────────────────────────────── */}
-      <section className="max-w-[1200px] mx-auto px-6 py-16">
-        <div className="flex items-end justify-between mb-8">
+      <section className="max-w-[1200px] mx-auto px-4 sm:px-6 py-10 sm:py-16">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-8">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-semibold text-success mb-2">
               <span className="live-dot" /> Live availability
             </div>
-            <h2 className="text-3xl font-bold text-foreground tracking-tight">Hospitals near you</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">Hospitals near you</h2>
             <p className="text-muted-foreground mt-1">Siliguri, West Bengal · Updated in real-time</p>
           </div>
           <Link to="/search"
@@ -297,8 +298,8 @@ export default function Home() {
             View all <ChevronRight className="h-4 w-4" />
           </Link>
         </div>
-        <div className="grid lg:grid-cols-[1fr_420px] gap-6">
-          <div className="space-y-4">
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_420px] gap-6 min-w-0">
+          <div className="space-y-4 min-w-0">
             {hospitals.slice(0, 3).map((h, i) => (
               <HospitalCard key={h.id} hospital={h} index={i} />
             ))}
@@ -314,12 +315,12 @@ export default function Home() {
       </section>
 
       {/* ── SOS EMERGENCY BANNER ─────────────────────────────────────────────── */}
-      <section className="px-6 my-4">
+      <section className="px-4 sm:px-6 my-4">
         <div className="max-w-[1200px] mx-auto rounded-3xl overflow-hidden relative"
           style={{ background: "linear-gradient(135deg, oklch(0.32 0.16 25), oklch(0.20 0.12 25))" }}>
           <div className="absolute inset-0 opacity-10"
             style={{ backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-          <div className="relative px-8 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="relative px-5 sm:px-8 py-8 sm:py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div className="flex items-center gap-5">
               <div className="relative h-16 w-16 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 sos-pulse">
                 <Siren className="h-8 w-8 text-white" strokeWidth={2} />
@@ -341,7 +342,7 @@ export default function Home() {
       </section>
 
       {/* ── HOW IT WORKS ─────────────────────────────────────────────────────── */}
-      <section className="py-20 px-6">
+      <section className="py-12 sm:py-20 px-4 sm:px-6">
         <div className="max-w-[1200px] mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 rounded-full bg-primary-soft text-primary px-4 py-1.5 text-xs font-bold uppercase tracking-wider mb-4">
@@ -371,7 +372,7 @@ export default function Home() {
       </section>
 
       {/* ── FEATURED DOCTORS ─────────────────────────────────────────────────── */}
-      <section className="py-16 px-6 bg-secondary border-y border-border">
+      <section className="py-10 sm:py-16 px-4 sm:px-6 bg-secondary border-y border-border">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex items-end justify-between mb-8">
             <div>
@@ -386,7 +387,7 @@ export default function Home() {
               All doctors <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory">
+          <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 sm:-mx-6 px-4 sm:px-6 snap-x snap-mandatory">
             {doctors.map((d) => {
               const avatarBg = d.avatarColor === "primary" ? "bg-primary" : d.avatarColor === "success" ? "bg-success" : d.avatarColor === "warning" ? "bg-warning" : "bg-emergency";
               return (
@@ -424,11 +425,11 @@ export default function Home() {
       </section>
 
       {/* ── TRUST SECTION ────────────────────────────────────────────────────── */}
-      <section className="py-20 px-6">
+      <section className="py-12 sm:py-20 px-4 sm:px-6">
         <div className="max-w-[1200px] mx-auto">
           <div className="rounded-3xl overflow-hidden"
             style={{ background: "linear-gradient(135deg, oklch(0.14 0.04 250) 0%, oklch(0.20 0.08 260) 100%)" }}>
-            <div className="px-10 py-14 grid md:grid-cols-2 gap-12 items-center">
+            <div className="px-6 sm:px-10 py-10 sm:py-14 grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <div className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "oklch(0.65 0.18 250)" }}>
                   Why MedConnect?
@@ -452,7 +453,7 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
-                <div className="mt-8 flex gap-3">
+          <div className="mt-8 flex flex-col sm:flex-row gap-3">
                   <Link to="/search"
                     className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-bold transition-all hover:opacity-90"
                     style={{ background: "oklch(0.55 0.18 250)", color: "white" }}>
@@ -488,7 +489,7 @@ export default function Home() {
 
       {/* ── FOOTER ───────────────────────────────────────────────────────────── */}
       <footer style={{ background: "oklch(0.10 0.02 250)", color: "oklch(0.75 0 0)" }}>
-        <div className="max-w-[1200px] mx-auto px-6 py-14 grid md:grid-cols-5 gap-8 text-sm">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-14 grid md:grid-cols-5 gap-8 text-sm">
           <div className="md:col-span-2">
             <div className="text-xl font-bold text-white mb-3">
               Med<span style={{ color: "oklch(0.65 0.18 250)" }}>Connect</span>
@@ -526,7 +527,7 @@ export default function Home() {
           ))}
         </div>
         <div style={{ borderTop: "1px solid oklch(1 0 0 / 0.06)" }}>
-          <div className="max-w-[1200px] mx-auto px-6 py-4 flex justify-between text-xs" style={{ color: "oklch(0.40 0 0)" }}>
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row gap-1 sm:justify-between text-xs" style={{ color: "oklch(0.40 0 0)" }}>
             <span>© 2025 MedConnect Health Pvt Ltd</span>
             <span>All rights reserved</span>
           </div>

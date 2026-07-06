@@ -2,7 +2,7 @@ import { MapPin, Plus, Minus, Navigation } from "lucide-react";
 
 export function MapPanel({ hospitals, selectedId }) {
   return (
-    <div className="relative h-full min-h-[400px] map-bg rounded-lg border border-border overflow-hidden">
+    <div className="relative h-full min-h-[260px] sm:min-h-[400px] map-bg rounded-lg border border-border overflow-hidden">
       {/* Faux roads */}
       <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
         <path d="M0,30 Q40,35 60,28 T100,32" stroke="oklch(0.85 0.01 200)" strokeWidth="0.6" fill="none" />
