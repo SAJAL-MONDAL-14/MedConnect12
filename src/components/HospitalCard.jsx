@@ -12,12 +12,8 @@ export function BedChip({ label, count, total, type = "general" }) {
   }[tone];
 
   return (
-    <span
-      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium ${styles}`}
-    >
-      <span className="font-mono">
-        {label}: {count === 0 ? "Full" : `${count} free`}
-      </span>
+    <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium ${styles}`}>
+      <span className="font-mono">{label}: {count === 0 ? "Full" : `${count} free`}</span>
     </span>
   );
 }
@@ -28,9 +24,7 @@ export function HospitalTypeBadge({ type }) {
       ? "bg-primary-soft text-primary"
       : "bg-accent text-accent-foreground border border-border";
   return (
-    <span
-      className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${styles}`}
-    >
+    <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${styles}`}>
       {type}
     </span>
   );
@@ -75,27 +69,24 @@ export function UpdatedAgo({ minutes }) {
 
 export function HospitalCard({ hospital, index, onBook }) {
   return (
-    <div className="group relative bg-card border border-border rounded-lg p-5 hover:shadow-lift transition-all border-l-4 border-l-primary">
-      <div className="flex items-start justify-between gap-3 mb-2">
-        <div className="flex items-center gap-2 flex-wrap">
-          {index !== undefined && (
-            <span className="font-mono text-xs text-text-muted">#{index + 1}</span>
-          )}
-          <h3 className="font-semibold text-[15px] text-foreground">{hospital.name}</h3>
+    <div className="group relative w-full max-w-full min-w-0 overflow-hidden bg-card border border-border rounded-lg p-3.5 sm:p-5 hover:shadow-lift transition-all border-l-4 border-l-primary">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-3 mb-2 min-w-0">
+        <div className="flex items-center gap-2 flex-wrap min-w-0">
+          {index !== undefined && <span className="font-mono text-xs text-text-muted">#{index + 1}</span>}
+          <h3 className="font-semibold text-[15px] text-foreground min-w-0 flex-1 break-words">{hospital.name}</h3>
           <HospitalTypeBadge type={hospital.type} />
           {hospital.verified && <VerifiedBadge />}
         </div>
-        <span className="shrink-0 rounded-full bg-muted px-2.5 py-0.5 text-xs font-mono text-muted-foreground">
+        <span className="self-start shrink-0 rounded-full bg-muted px-2.5 py-0.5 text-xs font-mono text-muted-foreground">
           {hospital.distanceKm} km
         </span>
       </div>
 
-      <p className="text-xs text-muted-foreground mb-2">{hospital.address}</p>
+      <p className="text-xs text-muted-foreground mb-2 break-words">{hospital.address}</p>
 
       {hospital.specialties.length > 0 && (
-        <p className="text-xs text-text-muted mb-3 truncate">
-          <span className="text-muted-foreground">Specialties:</span>{" "}
-          {hospital.specialties.slice(0, 4).join(" · ")}
+        <p className="text-xs text-text-muted mb-3 min-w-0 truncate">
+          <span className="text-muted-foreground">Specialties:</span> {hospital.specialties.slice(0, 4).join(" · ")}
         </p>
       )}
 
@@ -109,14 +100,14 @@ export function HospitalCard({ hospital, index, onBook }) {
         )}
       </div>
 
-      <div className="flex items-center justify-between pt-3 border-t border-border">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-3 border-t border-border">
+        <div className="flex items-center gap-3 flex-wrap">
           <StarRating rating={hospital.rating} reviews={hospital.reviews} />
           <UpdatedAgo minutes={hospital.updatedMinAgo} />
         </div>
         <button
           onClick={onBook}
-          className="inline-flex items-center gap-1 rounded-md bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary-dark transition"
+          className="inline-flex w-full sm:w-auto items-center justify-center gap-1 rounded-md bg-primary px-3.5 py-2 sm:py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary-dark transition"
         >
           View & Book
         </button>
