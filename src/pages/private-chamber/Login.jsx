@@ -15,7 +15,14 @@ export default function PrivateChamberLogin() {
 
   useEffect(() => {
     document.title = "Private chamber login — MedConnect";
-  }, []);
+    
+    // Redirect if already logged in
+    const token = localStorage.getItem("accessToken");
+    const clinic = localStorage.getItem("clinic_doctor");
+    if (token && clinic) {
+      navigate("/private-chamber/dashboard", { replace: true });
+    }
+  }, [navigate]);
 
   // Email validation effect
   useEffect(() => {
