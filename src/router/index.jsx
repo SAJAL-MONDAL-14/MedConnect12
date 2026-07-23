@@ -118,7 +118,7 @@ export const router = createBrowserRouter([
       { path: "private-chamber/register", element: <PrivateChamberRegister /> },
       { path: "private-chamber/login", element: <PrivateChamberLogin /> },
       {
-        path: "private-chamber/dashboard",
+        path: "private-chamber/dashboard/*",
         element: (
           <ChamberProtectedRoute>
             <PrivateChamberDashboard />
