@@ -9,6 +9,8 @@ import ChamberProtectedRoute from "@/components/ChamberProtectedRoute";
 const Home = lazy(() => import("@/pages/Home"));
 const SearchPage = lazy(() => import("@/pages/Search"));
 const Login = lazy(() => import("@/pages/Login"));
+const Register = lazy(() => import("@/pages/Register"));
+const VerifyOtp = lazy(() => import("@/pages/VerifyOtp"));
 const Profile = lazy(() => import("@/pages/Profile"));
 
 const Clinics = lazy(() => import("@/pages/Clinics"));
@@ -54,6 +56,8 @@ export const ROUTES = {
   HOME: "/",
   SEARCH: "/search",
   LOGIN: "/login",
+  REGISTER: "/register",
+  VERIFY_OTP: "/verify-otp",
   PROFILE: "/profile",
 
   CLINICS: "/clinics",
@@ -97,6 +101,8 @@ export const router = createBrowserRouter([
       { path: "", element: <Home /> },
       { path: "search", element: <SearchPage /> },
       { path: "login", element: <Login /> },
+      { path: "register", element: <Register /> },
+      { path: "verify-otp", element: <VerifyOtp /> },
       { path: "profile", element: <Profile /> },
 
       { path: "clinics", element: <Clinics /> },
