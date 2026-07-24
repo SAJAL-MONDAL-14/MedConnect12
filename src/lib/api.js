@@ -87,20 +87,15 @@ api.interceptors.response.use(
       }
     }
 
+    // If it's a 401 and we ALREADY retried (or it's an unrelated auth error), force logout
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("clinic_doctor");
+      window.location.href = "/private-chamber/login";
+    }
+
     return Promise.reject(error);
   },
 );
 
-// Interceptor to redirect to login if JWT expires (419 / 401 Unauthorized)
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response && error.response.status === 401) {
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("clinic_doctor");
-      window.location.href = "/private-chamber/login"; // Force redirect
-    }
-    return Promise.reject(error);
-  },
-);
 export default api;
